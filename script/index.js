@@ -15,17 +15,20 @@ const jugador = new Jugador()
 
 jugador.render()
 
-const plataformas = [new Plataforma({x:400,y:500}), new Plataforma({x: 800, y:300})]
+const plataformas = [new Plataforma({x:400,y:450}), new Plataforma({x: 800, y:400})]
 
 animar()
 
 addEventListener("keydown", ({key}) => {
+
     console.log("base " + jugador.base())
     console.log("suelo " + suelo)
     console.log("Esta sobre plataforma " + jugador.sobrePlataforma)
     console.log("saltos " + jugador.saltos)
     plataformas.forEach(plataforma =>{
         console.log("base plataforma " + (plataforma.posicion.y + plataforma.alto))
+        console.log("plataforma x " + plataforma.posicion.x)
+        console.log("plataforma y " + plataforma.posicion.y)
     })
     if (jugador.base() == suelo) {
         jugador.sobrePlataforma = false

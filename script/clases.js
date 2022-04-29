@@ -13,6 +13,7 @@ class Jugador {
         this.saltos = 0
         this.sobrePlataforma = false
         this.color = "red"
+        this.haColisionado = false
     }
 
     ladoDerecho(){
@@ -68,7 +69,10 @@ class Plataforma {
 
         this.ancho = 200
         this.alto = 50
-
+        this.top = this.posicion.y
+        this.bot = this.posicion.y + this.alto
+        this.derecha = this.posicion.x+ this.ancho
+        this.izquierda = this.posicion.x
     }
 
     render() {

@@ -45,11 +45,37 @@ function animar() {
 
     plataformas.forEach(plataforma => {
 
+
         if (jugador.ladoDerecho() >= plataforma.posicion.x //limitando la hitbox por la izquierda
             && jugador.posicion.x <= plataforma.posicion.x + plataforma.ancho //limitando la hitbox por la derecha
-            && jugador.posicion.y >= plataforma.posicion.y + plataforma.alto){
+            && jugador.posicion.y <= plataforma.posicion.y + plataforma.alto //estoy debajo
+        ) {
+            console.log("dentro del area")
+
+            jugador.saltos = 1
+
+        }
+
+        //hitbox
+
+        if (jugador.ladoDerecho() >= plataforma.izquierda //limitando la hitbox por la izquierda
+            && jugador.posicion.x <= plataforma.derecha //limitando la hitbox por la derecha
+            && jugador.posicion.y <= plataforma.bot  //estoy debajo
+            && jugador.base() >= plataforma.top)//estoy por encima
+        {
+
+            // if (jugador.ladoDerecho() >= plataforma.posicion.x //limitando la hitbox por la izquierda
+            //     && jugador.posicion.x == plataforma.posicion.x + plataforma.ancho //limitando la hitbox por la derecha
+            //     && jugador.posicion.y <= plataforma.posicion.y + plataforma.alto //estoy debajo
+            //     && jugador.base() > plataforma.posicion.y)//estoy por encima
+            // {
+            //     console.log("holaaaaaaaaaaaa")
+            //     jugador.velocidad.x = 0
+            // }
+
             console.log("colision")
             jugador.velocidad.y = gravedad
+
         }
 
         if (jugador.base() <= plataforma.posicion.y
