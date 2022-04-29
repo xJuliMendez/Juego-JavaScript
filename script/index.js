@@ -15,12 +15,16 @@ const jugador = new Jugador()
 
 jugador.render()
 
+console.log(canvas.height)
+
+//const plataforma = new Plataforma({tipo: "prueba", x: 400, y: 500, ancho: 200, alto: 50})
+
 const plataformas = mapa
 animar()
 
 addEventListener("keydown", ({key}) => {
 
-    if (jugador.base() == suelo) {
+    if (jugador.base == suelo) {
         jugador.sobrePlataforma = false
         jugador.saltos = 0
     }
@@ -30,14 +34,14 @@ addEventListener("keydown", ({key}) => {
                 jugador.saltar()
                 jugador.saltos = 0
             }
-            if ((jugador.base() >= suelo || jugador.sobrePlataforma) && jugador.saltos == 0) {
+            if ((jugador.base >= suelo || jugador.sobrePlataforma) && jugador.saltos == 0) {
                 jugador.saltar()
                 jugador.saltos = 1
                 jugador.sobrePlataforma = false
             }
             break
         case "s":
-            if (jugador.sobrePlataforma || jugador.base() == suelo) {
+            if (jugador.sobrePlataforma || jugador.base == suelo) {
                 jugador.color = "green"
                 jugador.v = 3
             }

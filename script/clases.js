@@ -2,8 +2,8 @@ class Platform {
 
     constructor({izquierda, arriba, ancho, alto}) {
 
-        this.derecha  = izquierda + ancho
-        this.base =  arriba + alto
+        this.derecha = izquierda + ancho
+        this.base = arriba + alto
         this.ancho = ancho;
         this.alto = alto;
         this.izquierda = izquierda;
@@ -29,7 +29,6 @@ class Player {
         this.ancho = ancho
         this.alto = alto
     }
-
 
 
     update(g, f) { // gravity and friction
@@ -103,7 +102,7 @@ class Jugador {
         this.base = this.posicion.y + this.altura
 
 
-        if ((this.base() + this.velocidad.y < canvas.height)) {
+        if ((this.base + this.velocidad.y <= canvas.height)) {
             this.velocidad.y += gravedad
         } else this.velocidad.y = 0
 
@@ -138,21 +137,24 @@ class Jugador {
 class Plataforma {
     constructor({tipo, x, y, ancho, alto}) {
         this.tipo = tipo
-            this.posicion = {
-                x,
-                y
-            }
         this.ancho = ancho
         this.alto = alto
-        this.top = this.posicion.y
-        this.bot = this.posicion.y + this.alto
-        this.derecha = this.posicion.x + this.ancho
-        this.izquierda = this.posicion.x
+        this.top = y
+        this.izquierda = x
+        this.bot = this.top + this.alto
+        this.derecha = this.izquierda + this.ancho
+
     }
 
     render() {
+        this.actualizar()
         c.fillStyle = "blue"
-        c.fillRect(this.posicion.x, this.posicion.y, this.ancho, this.alto)
+        c.fillRect(this.izquierda, this.top, this.ancho, this.alto)
+    }
+
+    actualizar(){
+        this.bot = this.top + this.alto
+        this.derecha = this.izquierda + this.ancho
     }
 
 }
