@@ -15,21 +15,11 @@ const jugador = new Jugador()
 
 jugador.render()
 
-const plataformas = [new Plataforma({x:400,y:450}), new Plataforma({x: 800, y:400})]
-
+const plataformas = mapa
 animar()
 
 addEventListener("keydown", ({key}) => {
 
-    console.log("base " + jugador.base())
-    console.log("suelo " + suelo)
-    console.log("Esta sobre plataforma " + jugador.sobrePlataforma)
-    console.log("saltos " + jugador.saltos)
-    plataformas.forEach(plataforma =>{
-        console.log("base plataforma " + (plataforma.posicion.y + plataforma.alto))
-        console.log("plataforma x " + plataforma.posicion.x)
-        console.log("plataforma y " + plataforma.posicion.y)
-    })
     if (jugador.base() == suelo) {
         jugador.sobrePlataforma = false
         jugador.saltos = 0
@@ -49,14 +39,13 @@ addEventListener("keydown", ({key}) => {
         case "s":
             if (jugador.sobrePlataforma || jugador.base() == suelo) {
                 jugador.color = "green"
+                jugador.v = 3
             }
             break
         case "a":
-            console.log(jugador.posicion.x)
             teclas.izquierda.pulsada = true
             break
         case "d":
-            console.log(jugador.posicion.x)
             teclas.derecha.pulsada = true
             break
     }
@@ -65,6 +54,7 @@ addEventListener("keyup", ({key}) => {
     switch (key) {
         case "s":
             jugador.color = "red"
+            jugador.v = 5
             break
         case "a":
             teclas.izquierda.pulsada = false
