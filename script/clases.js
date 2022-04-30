@@ -75,12 +75,8 @@ class Jugador {
 
         this.saltos = 0
         this.sobrePlataforma = false
-        this.color = "red"
+        this.color = "#FCBF49"
         this.haColisionado = false
-    }
-
-    ladoDerecho() {
-        return Math.floor(this.posicion.x + this.ancho)
     }
 
     render() {
@@ -116,17 +112,9 @@ class Jugador {
         this.velocidad.x = 5
     }
 
-    izquierda() {
+    moverIzquierda() {
         this.velocidad.x = -5
     }
-
-    // derecha(velocidad) {
-    //     this.velocidad.x = velocidad
-    // }
-    //
-    // izquierda(velocidad) {
-    //     this.velocidad.x = -velocidad
-    // }
 
     parar() {
         this.velocidad.x = 0
@@ -148,7 +136,7 @@ class Plataforma {
 
     render() {
         this.actualizar()
-        c.fillStyle = "blue"
+        c.fillStyle = "#D62828"
         c.fillRect(this.izquierda, this.top, this.ancho, this.alto)
     }
 

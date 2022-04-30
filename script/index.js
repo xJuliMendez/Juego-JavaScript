@@ -17,57 +17,8 @@ jugador.render()
 
 console.log(canvas.height)
 
-//const plataforma = new Plataforma({tipo: "prueba", x: 400, y: 500, ancho: 200, alto: 50})
-
 const plataformas = mapa
 animar()
-
-addEventListener("keydown", ({key}) => {
-
-    if (jugador.base == suelo) {
-        jugador.sobrePlataforma = false
-        jugador.saltos = 0
-    }
-    switch (key) {
-        case "w":
-            if (jugador.saltos == 1) {
-                jugador.saltar()
-                jugador.saltos = 0
-            }
-            if ((jugador.base >= suelo || jugador.sobrePlataforma) && jugador.saltos == 0) {
-                jugador.saltar()
-                jugador.saltos = 1
-                jugador.sobrePlataforma = false
-            }
-            break
-        case "s":
-            if (jugador.sobrePlataforma || jugador.base == suelo) {
-                jugador.color = "green"
-                jugador.v = 3
-            }
-            break
-        case "a":
-            teclas.izquierda.pulsada = true
-            break
-        case "d":
-            teclas.derecha.pulsada = true
-            break
-    }
-})
-addEventListener("keyup", ({key}) => {
-    switch (key) {
-        case "s":
-            jugador.color = "red"
-            jugador.v = 5
-            break
-        case "a":
-            teclas.izquierda.pulsada = false
-            break
-        case "d":
-            teclas.derecha.pulsada = false
-            break
-    }
-})
 
 
 
