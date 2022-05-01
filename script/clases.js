@@ -140,9 +140,17 @@ class Plataforma {
         c.fillRect(this.izquierda, this.top, this.ancho, this.alto)
     }
 
-    actualizar(){
+    actualizar() {
         this.bot = this.top + this.alto
         this.derecha = this.izquierda + this.ancho
     }
 
+}
+
+class TileSheet {
+    constructor(tileSize, columnas) {
+        this.imagen = new Image()
+        this.tileSize = tileSize
+        this.columnas = columnas
+    }
 }

@@ -1,3 +1,10 @@
+const fondo1 = new Image()
+const fondo2 = new Image()
+const fondo3 = new Image()
+fondo1.src = "/imagenes/fondos/background_layer_1.png"
+fondo2.src = "/imagenes/fondos/background_layer_2.png"
+fondo3.src = "/imagenes/fondos/background_layer_3.png"
+
 const teclas = {
     derecha: {
         pulsada: false
@@ -6,6 +13,12 @@ const teclas = {
         pulsada: false
     }
 }
+
+let desplazamiento = 0
+
+const tilemap = new TileSheet(24,20)
+
+tilemap.imagen.src = "/imagenes/oak_woods_tileset.png"
 
 addEventListener("keydown", ({key}) => {
 
@@ -62,6 +75,9 @@ function animar() {
     window.requestAnimationFrame(animar)
     c.clearRect(0, 0, canvas.width, canvas.height)
 
+    c.drawImage(fondo1, 0,0, canvas.width, canvas.height)
+    c.drawImage(fondo2, 0,0, canvas.width, canvas.height)
+    c.drawImage(fondo3, 0,0, canvas.width, canvas.height)
 
     jugador.actualizar()
 
@@ -85,11 +101,13 @@ function animar() {
                 jugador.parar()
 
                 if (teclas.derecha.pulsada) {
+                    desplazamiento += 1
                     plataformas.forEach(plataforma => {
                         plataforma.izquierda -= 1
                     })
                 }
                 if (teclas.izquierda.pulsada) {
+                    desplazamiento -= 1
                     plataformas.forEach(plataforma => {
                         plataforma.izquierda += 1
                     })
@@ -113,7 +131,7 @@ function animar() {
             && jugador.oPosicion.x <= plataforma.derecha
             && !jugador.haColisionado) {
             console.log("pabajo")
-            jugador.velocidad.y = gravedad
+            jugador.velocidad.y = 2
         }
         //hitbox lateral de la plataforma desde abajo
         if (jugador.base >= plataforma.top
@@ -125,5 +143,10 @@ function animar() {
         }
 
     })
+
+    if (desplazamiento >= 2000){
+        console.log("VICTORIA")
+    }
+    console.log(desplazamiento)
 
 }
