@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="300" height="30" tilewidth="23" tileheight="24" infinite="0" nextlayerid="48" nextobjectid="5">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="300" height="30" tilewidth="23" tileheight="24" infinite="0" nextlayerid="71" nextobjectid="5">
  <tileset firstgid="1" name="lamp" tilewidth="23" tileheight="24" tilecount="2" columns="1">
   <image source="imagenes/sprites/lamp.png" width="23" height="57"/>
  </tileset>
@@ -13,7 +13,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,28,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,28,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,11,11,11,11,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,150,153,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,28,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,28,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,9,10,9,9,9,10,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,150,153,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,28,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,28,28,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,4,4,4,4,4,4,4,4,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,4,5,9,9,9,9,9,9,9,9,9,9,10,4,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,150,151,141,142,152,153,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,4,4,4,4,4,10,10,10,10,10,10,10,10,4,4,4,4,4,10,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,28,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,4,5,6,0,0,0,0,29,29,3,4,5,6,0,205,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,10,9,9,9,9,10,9,9,9,9,9,9,9,10,11,0,0,0,0,0,0,0,0,0,0,0,0,0,3,4,5,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,10,6,29,29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610612919,0,0,0,0,2684354743,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,31,31,31,53,53,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,9,9,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,27,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,28,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,9,9,9,9,9,9,10,9,10,9,10,25,27,0,0,0,0,75,225,225,225,225,225,225,226,11,0,0,0,0,0,0,0,0,0,0,0,0,0,8,4,5,4,5,4,5,5,4,9,10,9,10,9,9,9,9,9,9,9,9,9,9,9,9,9,9,10,10,11,0,0,0,0,0,0,0,0,0,0,3,4,5,5,25,25,25,25,25,255,256,25,25,25,25,25,25,255,256,25,9,10,10,11,29,29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610612920,0,0,0,0,2684354743,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -47,13 +47,37 @@
   <imagelayer id="42" name="Copiar desde roca 1" offsetx="2430.67" offsety="614">
    <image source="imagenes/sprites/rock_1.png" width="20" height="11"/>
   </imagelayer>
+  <imagelayer id="67" name="Copiar desde Copiar desde roca 1" offsetx="5013.33" offsety="540.667">
+   <image source="imagenes/sprites/rock_1.png" width="20" height="11"/>
+  </imagelayer>
+  <imagelayer id="69" name="Copiar desde Copiar desde Copiar desde roca 1" offsetx="5891.33" offsety="276.667">
+   <image source="imagenes/sprites/rock_1.png" width="20" height="11"/>
+  </imagelayer>
+  <imagelayer id="70" name="Copiar desde Copiar desde Copiar desde Copiar desde roca 1" offsetx="6050" offsety="277.333">
+   <image source="imagenes/sprites/rock_1.png" width="20" height="11"/>
+  </imagelayer>
   <imagelayer id="39" name="roca 2" offsetx="2049.33" offsety="564">
    <image source="imagenes/sprites/rock_2.png" width="27" height="12"/>
   </imagelayer>
   <imagelayer id="44" name="Copiar desde roca 2" offsetx="2822.67" offsety="565.333">
    <image source="imagenes/sprites/rock_2.png" width="27" height="12"/>
   </imagelayer>
+  <imagelayer id="68" name="Copiar desde Copiar desde roca 2" offsetx="5154.67" offsety="514.667">
+   <image source="imagenes/sprites/rock_2.png" width="27" height="12"/>
+  </imagelayer>
+  <imagelayer id="65" name="Copiar desde Copiar desde roca 2" offsetx="4026" offsety="539.333">
+   <image source="imagenes/sprites/rock_2.png" width="27" height="12"/>
+  </imagelayer>
   <imagelayer id="40" name="roca 3" offsetx="2178" offsety="558">
+   <image source="imagenes/sprites/rock_3.png" width="45" height="18"/>
+  </imagelayer>
+  <imagelayer id="63" name="Copiar desde roca 3" offsetx="3538" offsety="510">
+   <image source="imagenes/sprites/rock_3.png" width="45" height="18"/>
+  </imagelayer>
+  <imagelayer id="64" name="Copiar desde Copiar desde roca 3" offsetx="3836.67" offsety="558">
+   <image source="imagenes/sprites/rock_3.png" width="45" height="18"/>
+  </imagelayer>
+  <imagelayer id="66" name="Copiar desde Copiar desde Copiar desde roca 3" offsetx="4577.33" offsety="533.333">
    <image source="imagenes/sprites/rock_3.png" width="45" height="18"/>
   </imagelayer>
   <imagelayer id="43" name="Copiar desde roca 3" offsetx="2622.67" offsety="583.333">
@@ -113,7 +137,16 @@
   <imagelayer id="29" name="roca 3" offsetx="1670.67" offsety="317.333">
    <image source="imagenes/sprites/rock_3.png" width="45" height="18"/>
   </imagelayer>
+  <imagelayer id="57" name="Copiar desde roca 3" offsetx="4369.33" offsety="221.333">
+   <image source="imagenes/sprites/rock_3.png" width="45" height="18"/>
+  </imagelayer>
+  <imagelayer id="53" name="Copiar desde roca 3" offsetx="3674.67" offsety="198">
+   <image source="imagenes/sprites/rock_3.png" width="45" height="18"/>
+  </imagelayer>
   <imagelayer id="30" name="Copiar desde roca 3" offsetx="917.333" offsety="222.667">
+   <image source="imagenes/sprites/rock_3.png" width="45" height="18"/>
+  </imagelayer>
+  <imagelayer id="61" name="Copiar desde Copiar desde roca 3" offsetx="5586.67" offsety="316">
    <image source="imagenes/sprites/rock_3.png" width="45" height="18"/>
   </imagelayer>
   <imagelayer id="32" name="Copiar desde Copiar desde roca 3" offsetx="2177.33" offsety="270.667">
@@ -122,7 +155,16 @@
   <imagelayer id="27" name="roca 1" offsetx="1662.67" offsety="325.333">
    <image source="imagenes/sprites/rock_1.png" width="20" height="11"/>
   </imagelayer>
+  <imagelayer id="56" name="Copiar desde roca 1" offsetx="4018" offsety="204.667">
+   <image source="imagenes/sprites/rock_1.png" width="20" height="11"/>
+  </imagelayer>
+  <imagelayer id="55" name="Copiar desde roca 1" offsetx="3940" offsety="133.333">
+   <image source="imagenes/sprites/rock_1.png" width="20" height="11"/>
+  </imagelayer>
   <imagelayer id="31" name="Copiar desde roca 1" offsetx="1240.67" offsety="180.667">
+   <image source="imagenes/sprites/rock_1.png" width="20" height="11"/>
+  </imagelayer>
+  <imagelayer id="60" name="Copiar desde Copiar desde roca 1" offsetx="4985.33" offsety="252.667">
    <image source="imagenes/sprites/rock_1.png" width="20" height="11"/>
   </imagelayer>
   <imagelayer id="34" name="Copiar desde Copiar desde roca 1" offsetx="2308.67" offsety="253.333">
@@ -131,17 +173,43 @@
   <imagelayer id="28" name="roca 2" offsetx="1685.33" offsety="324.667">
    <image source="imagenes/sprites/rock_2.png" width="27" height="12"/>
   </imagelayer>
+  <imagelayer id="54" name="Copiar desde roca 2" offsetx="3847.33" offsety="180">
+   <image source="imagenes/sprites/rock_2.png" width="27" height="12"/>
+  </imagelayer>
+  <imagelayer id="58" name="Copiar desde Copiar desde roca 2" offsetx="4568" offsety="179.333">
+   <image source="imagenes/sprites/rock_2.png" width="27" height="12"/>
+  </imagelayer>
+  <imagelayer id="59" name="Copiar desde Copiar desde Copiar desde roca 2" offsetx="4852.67" offsety="203.333">
+   <image source="imagenes/sprites/rock_2.png" width="27" height="12"/>
+  </imagelayer>
+  <imagelayer id="62" name="Copiar desde Copiar desde Copiar desde Copiar desde roca 2" offsetx="5464.67" offsety="348">
+   <image source="imagenes/sprites/rock_2.png" width="27" height="12"/>
+  </imagelayer>
   <imagelayer id="33" name="Copiar desde roca 2" offsetx="2110.67" offsety="276.667">
    <image source="imagenes/sprites/rock_2.png" width="27" height="12"/>
   </imagelayer>
  </group>
- <imagelayer id="36" name="señal" offsetx="2425.33" offsety="209.333">
-  <image source="imagenes/sprites/sign.png" width="22" height="31"/>
- </imagelayer>
- <imagelayer id="37" name="Copiar desde señal" offsetx="1026.67" offsety="210">
-  <image source="imagenes/sprites/sign.png" width="22" height="31"/>
- </imagelayer>
- <layer id="47" name="colisiones" width="300" height="30">
+ <group id="52" name="señales" offsetx="14.6667" offsety="0">
+  <imagelayer id="36" name="señal" offsetx="2425.33" offsety="209.333">
+   <image source="imagenes/sprites/sign.png" width="22" height="31"/>
+  </imagelayer>
+  <imagelayer id="51" name="Copiar desde señal" offsetx="3697.33" offsety="521.333">
+   <image source="imagenes/sprites/sign.png" width="22" height="31"/>
+  </imagelayer>
+  <imagelayer id="50" name="Copiar desde señal" offsetx="4226" offsety="209.333">
+   <image source="imagenes/sprites/sign.png" width="22" height="31"/>
+  </imagelayer>
+  <imagelayer id="49" name="Copiar desde señal" offsetx="3054.67" offsety="160.667">
+   <image source="imagenes/sprites/sign.png" width="22" height="31"/>
+  </imagelayer>
+  <imagelayer id="48" name="Copiar desde señal" offsetx="1460" offsety="544.667">
+   <image source="imagenes/sprites/sign.png" width="22" height="31"/>
+  </imagelayer>
+  <imagelayer id="37" name="Copiar desde señal" offsetx="1026.67" offsety="210">
+   <image source="imagenes/sprites/sign.png" width="22" height="31"/>
+  </imagelayer>
+ </group>
+ <layer id="47" name="colisiones" width="300" height="30" visible="0">
   <data encoding="csv">
 91,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
