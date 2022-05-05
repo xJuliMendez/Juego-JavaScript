@@ -17,7 +17,7 @@ jugador.render()
 
 console.log(canvas.height)
 
-const plataformas = mapa
+// const plataformas = mapa
 animar()
 
 

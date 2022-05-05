@@ -1,57 +1,3 @@
-class Platform {
-
-    constructor({izquierda, arriba, ancho, alto}) {
-
-        this.derecha = izquierda + ancho
-        this.base = arriba + alto
-        this.ancho = ancho;
-        this.alto = alto;
-        this.izquierda = izquierda;
-        this.arriba = arriba;
-    }
-
-
-    render() {
-        c.fillStyle = "blue"
-        c.fillRect(this.posicion.x, this.posicion.y, this.ancho, this.alto)
-    }
-
-}
-
-class Player {
-
-    cconstructor({izquierda, arriba}) {
-
-        this.derecha = this.oDerecha = izquierda + ancho
-        this.base = this.oBase = arriba + alto
-        this.izquierda = this.oIzquierda = izquierda
-        this.arriba = this.oArriba = arriba
-        this.ancho = ancho
-        this.alto = alto
-    }
-
-
-    update(g, f) { // gravity and friction
-
-        this.vy += g; // you can make updates to velocity before or after the position update
-
-        this.vx *= f; // I choose before so there isn't one frame of inactivity on the first cycle
-        this.vy *= f;
-
-        this.ob = this.b; // update the old positions to the current positions
-        this.ol = this.l;
-        this.or = this.r;
-        this.ot = this.t;
-
-        this.l += this.vx; // update the current positions to the new positions
-        this.t += this.vy;
-        this.r = this.l + this.w;
-        this.b = this.t + this.h;
-
-    }
-
-}
-
 class Jugador {
     constructor() {
         this.posicion = {
@@ -122,35 +68,23 @@ class Jugador {
 
 }
 
-class Plataforma {
-    constructor({tipo, x, y, ancho, alto}) {
-        this.tipo = tipo
-        this.ancho = ancho
-        this.alto = alto
-        this.top = y
-        this.izquierda = x
-        this.bot = this.top + this.alto
-        this.derecha = this.izquierda + this.ancho
+
+
+class Frontera{
+
+    static ancho = 72
+    static alto = 72
+
+    constructor({posicion}) {
+
+        this.posicion = posicion
+        this.ancho = 72
+        this.alto = 72
 
     }
 
-    render() {
-        this.actualizar()
-        c.fillStyle = "#D62828"
-        c.fillRect(this.izquierda, this.top, this.ancho, this.alto)
-    }
+    render(){
+        c.fillStyle = "red"
+        c.fillRect(this.posicion.x -offset.x, this.posicion.y - offset.y, this.ancho, this.alto)    }
 
-    actualizar() {
-        this.bot = this.top + this.alto
-        this.derecha = this.izquierda + this.ancho
-    }
-
-}
-
-class TileSheet {
-    constructor(tileSize, columnas) {
-        this.imagen = new Image()
-        this.tileSize = tileSize
-        this.columnas = columnas
-    }
 }
