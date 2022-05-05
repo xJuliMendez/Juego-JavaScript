@@ -70,21 +70,26 @@ class Jugador {
 
 
 
-class Frontera{
+class Plataforma {
 
-    static ancho = 72
+    static ancho = 69
     static alto = 72
 
     constructor({posicion}) {
 
         this.posicion = posicion
-        this.ancho = 72
-        this.alto = 72
+        this.anchoPlataforma = 72
+        this.altoPlataforma = 72
 
+        this.izquierda = this.posicion.x
+        this.derecha = this.posicion.x + this.anchoPlataforma
+        this.top = this.posicion.y
+        this.bot = this.posicion.y + this.altoPlataforma
     }
 
     render(){
-        c.fillStyle = "red"
-        c.fillRect(this.posicion.x -offset.x, this.posicion.y - offset.y, this.ancho, this.alto)    }
+        c.fillStyle = "rgba(255,0,0,1)"
+        console.log(c)
+        c.fillRect(this.posicion.x -offset.x, this.posicion.y - offset.y -50, this.ancho, this.alto)    }
 
 }
