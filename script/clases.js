@@ -1,8 +1,8 @@
 class Jugador {
     constructor() {
         this.posicion = {
-            x: 200,
-            y: 100
+            x: 1000,
+            y: 300
         }
         this.oPosicion = {
             x: this.posicion.x,
@@ -51,7 +51,7 @@ class Jugador {
     }
 
     saltar() {
-        this.velocidad.y = -10
+        this.velocidad.y = -15
     }
 
     moverDerecha() {
@@ -69,7 +69,6 @@ class Jugador {
 }
 
 
-
 class Plataforma {
 
     static ancho = 69
@@ -77,19 +76,39 @@ class Plataforma {
 
     constructor({posicion}) {
 
-        this.posicion = posicion
-        this.anchoPlataforma = 72
+        this.posicion = {
+            x: posicion.x,
+            y: posicion.y
+        }
+        this.anchoPlataforma = 69
         this.altoPlataforma = 72
 
-        this.izquierda = this.posicion.x
-        this.derecha = this.posicion.x + this.anchoPlataforma
         this.top = this.posicion.y
         this.bot = this.posicion.y + this.altoPlataforma
     }
 
+    render() {
+
+        c.fillStyle = "rgba(0,255,0,0.3)"
+        c.fillRect(this.posicion.x, this.posicion.y, this.anchoPlataforma, this.altoPlataforma)
+
+    }
+
+}
+
+class Sprite {
+    constructor({imagen}) {
+
+        this.posicion ={
+            x:0,
+            y:40
+        }
+        this.imagen = imagen
+
+    }
+
     render(){
-        c.fillStyle = "rgba(255,0,0,1)"
-        console.log(c)
-        c.fillRect(this.posicion.x -offset.x, this.posicion.y - offset.y -50, this.ancho, this.alto)    }
+        c.drawImage(this.imagen, this.posicion.x, this.posicion.y)
+    }
 
 }

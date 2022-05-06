@@ -1,6 +1,6 @@
 const offset = {
-    x:0,
-    y: 205
+    x: 0,
+    y: 10
 }
 
 const fondo1 = new Image()
@@ -10,8 +10,10 @@ fondo1.src = "/imagenes/fondos/background_layer_1.png"
 fondo2.src = "/imagenes/fondos/background_layer_2.png"
 fondo3.src = "/imagenes/fondos/background_layer_3.png"
 
-const tilemap = new Image()
-tilemap.src = "/imagenes/mapa/Mapa.png"
+const tilemapImagen = new Image()
+tilemapImagen.src = "/imagenes/mapa/Mapa.png"
+
+const tilemap = new Sprite({imagen: tilemapImagen})
 
 const mapaColisiones = []
 for (let i = 0; i < colisiones.length; i += 265) {
@@ -22,11 +24,11 @@ const plataformas = []
 
 mapaColisiones.forEach((fila, i) => {
     fila.forEach((valor, j) => {
-        if (valor === 318){
+        if (valor == 318) {
             plataformas.push(new Plataforma({
                 posicion: {
-                    x: j * Plataforma.ancho,
-                    y: i * Plataforma.alto
+                    x: j * Plataforma.ancho + offset.x,
+                    y: i * Plataforma.alto - offset.y
                 }
             }))
         }
@@ -106,8 +108,7 @@ function animar() {
     c.drawImage(fondo3, 0, 0, canvas.width, canvas.height)
 
 
-
-    c.drawImage(tilemap, -offset.x, -offset.y)
+    tilemap.render()
 
 
     plataformas.forEach(plataforma => {
@@ -115,81 +116,93 @@ function animar() {
         plataforma.render()
 
         //moviemiento del jugador
-        if (jugador.haColisionado) jugador.parar()
-        else {
+
+        if (teclas.izquierda.pulsada
+            && jugador.posicion.x > 100
+            && !jugador.haColisionado
+        ) {
+            jugador.moverIzquierda()
+        } else if (teclas.derecha.pulsada
+            && jugador.posicion.x < 800
+            && !jugador.haColisionado
+        ) {
+            jugador.moverDerecha()
+        } else {
+
+            jugador.parar()
+
+            if (teclas.derecha.pulsada
+                && !jugador.haColisionado) {
+                desplazamiento += 1
+                tilemap.posicion.x -= 0.005
+                plataformas.forEach(plataforma => {
+                    plataforma.posicion.x -= 0.005
+                })
+
+            }
             if (teclas.izquierda.pulsada
-                && jugador.posicion.x > 100
-            ) {
-                jugador.moverIzquierda()
-            } else if (teclas.derecha.pulsada
-                && jugador.posicion.x < 800
-            ) {
-                jugador.moverDerecha()
-            } else {
+                && !jugador.haColisionado) {
+                desplazamiento -= 1
+                tilemap.posicion.x += 0.005
 
-                jugador.parar()
+                plataformas.forEach(plataforma => {
+                    plataforma.posicion.x += 0.005
 
-                if (teclas.derecha.pulsada) {
-                    desplazamiento += 1
-                    plataformas.forEach(plataforma => {
-                        plataforma.izquierda -= 1
-                    })
-                }
-                if (teclas.izquierda.pulsada) {
-                    desplazamiento -= 1
-                    plataformas.forEach(plataforma => {
-                        plataforma.izquierda += 1
-                    })
-                }
+                })
             }
         }
 
+
         //hitbox superior de la plataforma
 
-        // if (jugador.base>=plataforma.top
-        // &&jugador.base + jugador.velocidad.y >= plataforma.top
-        // &&jugador.oDerecha >= plataforma.izquierda
-        // &&jugador.oPosicion.x <= plataforma.derecha){
-        //     jugador.velocidad.y = 0
-        // }
-        //
-        // if (jugador.base <= plataforma.top
-        //     && jugador.base + jugador.velocidad.y >= plataforma.top
-        //     && jugador.derecha >= plataforma.izquierda
-        //     && jugador.posicion.x <= plataforma.derecha
+        if (jugador.base <= plataforma.top
+            && jugador.base + jugador.velocidad.y >= plataforma.top
+            && jugador.derecha >= plataforma.posicion.x
+            && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma
+        ) {
+            jugador.sobrePlataforma = true
+            jugador.velocidad.y = 0
+
+        }
+
+
+        //hitbox inferior de la plataforma
+        if (jugador.posicion.y <= plataforma.bot
+            && jugador.base >= plataforma.bot
+            && jugador.derecha >= plataforma.posicion.x
+            && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma
+            && !jugador.haColisionado
+        ) {
+            console.log("pabajo")
+            jugador.velocidad.y = 2
+        }
+        //hitbox lateral de la plataforma desde abajo
+        if (jugador.base >= plataforma.top
+            && jugador.posicion.y <= plataforma.bot
+            && (jugador.derecha <= plataforma.posicion.x || jugador.posicion.x >= plataforma.posicion.x + plataforma.anchoPlataforma)
+            && (jugador.derecha >= plataforma.posicion.x && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma)
+        ) {
+            console.log("quieto")
+            jugador.haColisionado = true
+        }else {
+            jugador.haColisionado = false
+        }
+        // if (((jugador.posicion.y >= plataforma.top && jugador.posicion.y <= plataforma.base)
+        //         || (jugador.base >= plataforma.top && jugador.base <= plataforma.top))
+        //     && (jugador.derecha >= plataforma.posicion.x || jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma)
         // ) {
-        //     jugador.sobrePlataforma = true
-        //     jugador.velocidad.y = 0
+        //     jugador.haColisionado = true
+        // } else {
         //     jugador.haColisionado = false
         // }
-        //hitbox inferior de la plataforma
-        //     if (jugador.oPosicion.y <= plataforma.bot
-        //         && jugador.oBase >= plataforma.bot
-        //         && jugador.oDerecha >= plataforma.izquierda
-        //         && jugador.oPosicion.x <= plataforma.derecha
-        //         && !jugador.haColisionado
-        //     ) {
-        //         console.log("pabajo")
-        //         jugador.velocidad.y = 2
-        //     }
-        //     //hitbox lateral de la plataforma desde abajo
-        //     if (jugador.base >= plataforma.top
-        //         && jugador.posicion.y <= plataforma.bot
-        //         && (jugador.oDerecha <= plataforma.izquierda || jugador.oPosicion.x >= plataforma.derecha)
-        //         && (jugador.derecha >= plataforma.izquierda && jugador.posicion.x <= plataforma.derecha)
-        //     ) {
-        //         console.log("quieto")
-        //         jugador.haColisionado = true
-        //     }
-        //
+
     })
 
     jugador.actualizar()
 
 
-
     if (desplazamiento >= 2000) {
-        console.log("VICTORIA")
+        // console.log("VICTORIA")
 
     }
 }
