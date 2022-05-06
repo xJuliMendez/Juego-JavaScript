@@ -89,7 +89,7 @@ class Plataforma {
 
     render() {
 
-        c.fillStyle = "rgba(0,255,0,0.3)"
+        c.fillStyle = "rgba(0,255,0,0.0)"
         c.fillRect(this.posicion.x, this.posicion.y, this.anchoPlataforma, this.altoPlataforma)
 
     }
