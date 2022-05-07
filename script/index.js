@@ -12,18 +12,15 @@ const gravedad = .6
 const suelo = canvas.height
 
 const jugador = new Jugador({
-    ruta: "/imagenes/sprites/jugador/red/char_red_1.png",
+    spriteSet: "/imagenes/sprites/jugador/idle/Warrior_Idle_",
     posicion: {
         x: 1100,
         y: 200
     },
     escala: 3,
-    framesHorizontales: 8,
-    framesVerticales: 11,
-    margenSprite: {x: 50, y: 110},
+    margenSprite: {x: 50, y: 85},
     // sprites: sprites
 })
-
 
 animar()
 

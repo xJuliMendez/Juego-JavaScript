@@ -1,6 +1,6 @@
 class Sprite {
     constructor({
-                    ruta,
+                    ruta = "",
                     posicion,
                     escala = 1,
                     framesHorizontales = 1,
@@ -46,8 +46,7 @@ class Sprite {
 
             if (this.frameActual < this.framesMaxAnimacion - 1) {
                 this.frameActual++
-            }
-            else {
+            } else {
                 this.frameActual = 0
             }
         }
@@ -62,23 +61,22 @@ class Sprite {
 
 class Jugador extends Sprite {
     constructor({
-                    ruta,
+                    spriteSet,
                     posicion,
-                    escala = 1,
-                    framesHorizontales = 1,
+                    escala = 3,
                     framesMaxAnimacion = 6,
-                    framesVerticales = 8,
                     margenSprite = {x: 0, y: 0}
                 }) {
 
         super({
-            ruta,
             posicion,
             escala,
-            framesHorizontales,
-            framesVerticales,
             margenSprite
         })
+
+        this.imagen = new Image()
+        this.imagen.src = spriteSet + "1.png"
+        this.ruta = spriteSet
 
         this.oPosicion = {
             x: this.posicion.x,
@@ -89,9 +87,8 @@ class Jugador extends Sprite {
             y: 10
         }
 
-        this.posicionVertical = 0
         this.framesMaxAnimacion = framesMaxAnimacion
-        this.frameActual = 0
+        this.frameActual = 1
         this.framesTranscurridos = 0
         this.framesEspera = 10
 
@@ -102,10 +99,8 @@ class Jugador extends Sprite {
         //     sprites[sprite].tileset.imagen.src = sprites[sprite].tileset.ruta
         // }
 
-        console.log(this.sprites)
-
-        this.ancho = this.imagen.width / this.framesHorizontales
-        this.altura = this.imagen.height / this.framesVerticales
+        this.ancho = this.imagen.width
+        this.altura = this.imagen.height
 
         this.derecha = this.oDerecha = this.posicion.x + this.ancho
         this.base = this.oBase = this.posicion.y + this.altura
@@ -115,9 +110,27 @@ class Jugador extends Sprite {
         this.haColisionado = false
     }
 
-    // render() {
-    //     c.drawImage()
-    // }
+    render() {
+        c.drawImage(this.imagen,
+            this.posicion.x - this.margenSprite.x,                                        //posicion del canvas en la que se va a colocar
+            this.posicion.y - this.margenSprite.y,
+            this.ancho * this.escala,
+            this.altura * this.escala)
+    }
+
+    actualizarFrames() {
+        this.framesTranscurridos++
+
+        if (this.framesTranscurridos % this.framesEspera === 0) {
+
+            if (this.frameActual < this.framesMaxAnimacion - 1) {
+                this.imagen.src = this.ruta + this.frameActual + ".png"
+                this.frameActual++
+            } else {
+                this.frameActual = 1
+            }
+        }
+    }
 
     actualizar() {
         this.render()

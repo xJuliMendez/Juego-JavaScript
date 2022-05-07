@@ -1,23 +1,14 @@
-const tileSet1 = {
-    ruta: "/imagenes/sprites/jugador/red/char_red_1.png",
-    framesVerticales: 11,
-    framesHorizontales: 8
-}
-
-const tileSet2 = {
-    ruta: "/imagenes/sprites/jugador/red/char_red_2.png",
-    framesVerticales: 11,
-    framesHorizontales: 8
-}
-
 const sprites = {
-    andar: {
-        tileset: tileSet1,
-        framesMaxAnimacion: 13,
-        posicionVertical: 0
+    quieto:{
+        src: "/imagenes/sprites/jugador/idle/Warrior_Idle_",
+        framesMaxAnimacion: 6,
+    },
+    correr: {
+        src: "/imagenes/sprites/jugador/run/Warrior_Run_",
+        framesMaxAnimacion: 8,
     },
     agachar: {
-        tileset: tileSet2,
+        tileset: "tileSet2",
         framesMaxAnimacion: 3,
         posicionVertical: 9
     }
@@ -72,20 +63,26 @@ function animar() {
             && jugador.posicion.x > 400
             && !jugador.haColisionado
         ) {
-            jugador.imagen = jugador.sprites.agachar.tileset.imagen
+            jugador.ruta = sprites.correr.src
+            jugador.framesMaxAnimacion = sprites.correr.framesMaxAnimacion
             jugador.moverIzquierda()
         } else if (teclas.derecha.pulsada
             && jugador.posicion.x < 800
             && !jugador.haColisionado
         ) {
-            jugador.imagen = jugador.sprites.andar.tileset.imagen
+            jugador.ruta = sprites.correr.src
+            jugador.framesMaxAnimacion = sprites.correr.framesMaxAnimacion
             jugador.moverDerecha()
         } else {
 
+            jugador.ruta = sprites.quieto.src
+            jugador.framesMaxAnimacion = sprites.quieto.framesMaxAnimacion
             jugador.parar()
 
             if (teclas.derecha.pulsada
                 && !jugador.haColisionado) {
+                jugador.ruta = sprites.correr.src
+                jugador.framesMaxAnimacion = sprites.correr.framesMaxAnimacion
                 desplazamiento += 1
                 tilemap.posicion.x -= 0.005
                 tienda.posicion.x -= 0.005
@@ -96,6 +93,8 @@ function animar() {
             }
             if (teclas.izquierda.pulsada
                 && !jugador.haColisionado) {
+                jugador.ruta = sprites.correr.src
+                jugador.framesMaxAnimacion = sprites.correr.framesMaxAnimacion
                 desplazamiento -= 1
                 tilemap.posicion.x += 0.005
                 tienda.posicion.x += 0.005
