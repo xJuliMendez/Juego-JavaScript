@@ -1,9 +1,80 @@
-class Jugador {
-    constructor() {
+class Sprite {
+    constructor({
+                    ruta,
+                    posicion,
+                    escala = 1,
+                    framesHorizontales = 1,
+                    framesMaxAnimacion = 1,
+                    framesVerticales = 1,
+                    posicionVertical = 0,
+                    margenSprite = {x: 0, y: 0}
+                }) {
+
         this.posicion = {
-            x: 1000,
-            y: 300
+            x: posicion.x,
+            y: posicion.y
         }
+        this.imagen = new Image()
+        this.imagen.src = ruta
+        this.escala = escala
+        this.posicionVertical = posicionVertical
+        this.framesHorizontales = framesHorizontales
+        this.framesMaxAnimacion = framesMaxAnimacion,
+            this.framesVerticales = framesVerticales
+        this.frameActual = 0
+        this.framesTranscurridos = 0
+        this.framesEspera = 10
+        this.margenSprite = margenSprite
+    }
+
+    render() {
+        c.drawImage(this.imagen,
+            this.frameActual * (this.imagen.width / this.framesHorizontales),                                                  //posicion X inicial
+            this.posicionVertical * (this.imagen.height / this.framesVerticales),                                                  //posicion Y inicial
+            this.imagen.width / this.framesHorizontales,                    //tamañano del recorte, en este caso es la longitud entre el numero de frames de animacion dentro de la imagen
+            this.imagen.height / this.framesVerticales,                                     //alto del recorte
+            this.posicion.x - this.margenSprite.x,                                        //posicion del canvas en la que se va a colocar
+            this.posicion.y - this.margenSprite.y,
+            (this.imagen.width / this.framesHorizontales) * this.escala,       //tamaño que se va a mostrar
+            (this.imagen.height / this.framesVerticales) * this.escala)
+    }
+
+    actualizarFrames() {
+        this.framesTranscurridos++
+
+        if (this.framesTranscurridos % this.framesEspera === 0) {
+            if (this.frameActual < this.framesMaxAnimacion - 1) this.frameActual++
+            else this.frameActual = 0
+        }
+    }
+
+    actualizar() {
+        this.render()
+        this.actualizarFrames()
+    }
+
+}
+
+class Jugador extends Sprite {
+    constructor({
+                    ruta,
+                    posicion,
+                    escala = 1,
+                    framesHorizontales = 1,
+                    framesMaxAnimacion = 6,
+                    framesVerticales = 8,
+                    margenSprite = {x: 0, y: 0}
+                }) {
+
+        super({
+            ruta,
+            posicion,
+            escala,
+            framesHorizontales,
+            framesVerticales,
+            margenSprite
+        })
+
         this.oPosicion = {
             x: this.posicion.x,
             y: this.posicion.y
@@ -13,25 +84,26 @@ class Jugador {
             y: 10
         }
 
-        this.ancho = 30
-        this.altura = 30
+        this.posicionVertical = 0
+        this.framesMaxAnimacion = framesMaxAnimacion
+        this.frameActual = 0
+        this.framesTranscurridos = 0
+        this.framesEspera = 10
 
-        this.derecha = this.oDerecha = this.x + this.ancho
+        this.ancho = this.imagen.width / this.framesHorizontales
+        this.altura = this.imagen.height / this.framesVerticales
+
+        this.derecha = this.oDerecha = this.posicion.x + this.ancho
         this.base = this.oBase = this.posicion.y + this.altura
 
         this.saltos = 0
         this.sobrePlataforma = false
-        this.color = "#FCBF49"
         this.haColisionado = false
-    }
-
-    render() {
-        c.fillStyle = this.color
-        c.fillRect(this.posicion.x, this.posicion.y, this.ancho, this.altura)
     }
 
     actualizar() {
         this.render()
+        this.actualizarFrames()
 
         this.oPosicion.x = this.posicion.x
         this.oPosicion.y = this.posicion.y
@@ -44,9 +116,10 @@ class Jugador {
         this.base = this.posicion.y + this.altura
 
 
-        if ((this.base + this.velocidad.y <= canvas.height)) {
+        if ((this.base + this.velocidad.y <= canvas.height) && !subiendoMapa) {
             this.velocidad.y += gravedad
         } else this.velocidad.y = 0
+
 
     }
 
@@ -89,26 +162,9 @@ class Plataforma {
 
     render() {
 
-        c.fillStyle = "rgba(0,255,0,0.0)"
+        c.fillStyle = "rgba(0,255,0,0.5)"
         c.fillRect(this.posicion.x, this.posicion.y, this.anchoPlataforma, this.altoPlataforma)
 
-    }
-
-}
-
-class Sprite {
-    constructor({imagen}) {
-
-        this.posicion ={
-            x:0,
-            y:40
-        }
-        this.imagen = imagen
-
-    }
-
-    render(){
-        c.drawImage(this.imagen, this.posicion.x, this.posicion.y)
     }
 
 }

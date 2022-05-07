@@ -11,13 +11,19 @@ const gravedad = .6
 
 const suelo = canvas.height
 
-const jugador = new Jugador()
+const jugador = new Jugador({
+    ruta: "/imagenes/sprites/jugador/red/char_red_1.png",
+    posicion: {
+        x: 1100,
+        y: 200
+    },
+    escala: 3,
+    framesHorizontales: 8,
+    framesVerticales: 11,
+    margenSprite: {x: 50, y: 110}
+})
 
-jugador.render()
 
-console.log(canvas.height)
-
-// const plataformas = mapa
 animar()
 
 
