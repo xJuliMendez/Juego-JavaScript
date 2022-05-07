@@ -1,3 +1,28 @@
+const tileSet1 = {
+    ruta: "/imagenes/sprites/jugador/red/char_red_1.png",
+    framesVerticales: 11,
+    framesHorizontales: 8
+}
+
+const tileSet2 = {
+    ruta: "/imagenes/sprites/jugador/red/char_red_2.png",
+    framesVerticales: 11,
+    framesHorizontales: 8
+}
+
+const sprites = {
+    andar: {
+        tileset: tileSet1,
+        framesMaxAnimacion: 13,
+        posicionVertical: 0
+    },
+    agachar: {
+        tileset: tileSet2,
+        framesMaxAnimacion: 3,
+        posicionVertical: 9
+    }
+}
+
 const teclas = {
     derecha: {
         pulsada: false
@@ -27,8 +52,6 @@ function animar() {
     tilemap.render()
 
 
-
-
     plataformas.forEach(plataforma => {
 
         plataforma.render()
@@ -49,14 +72,13 @@ function animar() {
             && jugador.posicion.x > 400
             && !jugador.haColisionado
         ) {
-
-
-
+            jugador.imagen = jugador.sprites.agachar.tileset.imagen
             jugador.moverIzquierda()
         } else if (teclas.derecha.pulsada
             && jugador.posicion.x < 800
             && !jugador.haColisionado
         ) {
+            jugador.imagen = jugador.sprites.andar.tileset.imagen
             jugador.moverDerecha()
         } else {
 
@@ -186,3 +208,8 @@ addEventListener("keyup", ({key}) => {
     }
 })
 
+function crearImagen(ruta) {
+    let imagen = new Image()
+    imagen.src = ruta
+    return imagen
+}

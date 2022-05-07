@@ -20,7 +20,8 @@ const jugador = new Jugador({
     escala: 3,
     framesHorizontales: 8,
     framesVerticales: 11,
-    margenSprite: {x: 50, y: 110}
+    margenSprite: {x: 50, y: 110},
+    // sprites: sprites
 })
 
 

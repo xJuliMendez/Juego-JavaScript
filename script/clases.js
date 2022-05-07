@@ -19,8 +19,8 @@ class Sprite {
         this.escala = escala
         this.posicionVertical = posicionVertical
         this.framesHorizontales = framesHorizontales
-        this.framesMaxAnimacion = framesMaxAnimacion,
-            this.framesVerticales = framesVerticales
+        this.framesMaxAnimacion = framesMaxAnimacion
+        this.framesVerticales = framesVerticales
         this.frameActual = 0
         this.framesTranscurridos = 0
         this.framesEspera = 10
@@ -43,8 +43,13 @@ class Sprite {
         this.framesTranscurridos++
 
         if (this.framesTranscurridos % this.framesEspera === 0) {
-            if (this.frameActual < this.framesMaxAnimacion - 1) this.frameActual++
-            else this.frameActual = 0
+
+            if (this.frameActual < this.framesMaxAnimacion - 1) {
+                this.frameActual++
+            }
+            else {
+                this.frameActual = 0
+            }
         }
     }
 
@@ -90,6 +95,15 @@ class Jugador extends Sprite {
         this.framesTranscurridos = 0
         this.framesEspera = 10
 
+        // this.sprites = sprites
+        //
+        // for (const sprite in sprites) {
+        //     sprites[sprite].tileset.imagen = new Image()
+        //     sprites[sprite].tileset.imagen.src = sprites[sprite].tileset.ruta
+        // }
+
+        console.log(this.sprites)
+
         this.ancho = this.imagen.width / this.framesHorizontales
         this.altura = this.imagen.height / this.framesVerticales
 
@@ -100,6 +114,10 @@ class Jugador extends Sprite {
         this.sobrePlataforma = false
         this.haColisionado = false
     }
+
+    // render() {
+    //     c.drawImage()
+    // }
 
     actualizar() {
         this.render()
