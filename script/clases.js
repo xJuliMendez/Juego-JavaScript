@@ -92,13 +92,6 @@ class Jugador extends Sprite {
         this.framesTranscurridos = 0
         this.framesEspera = 10
 
-        // this.sprites = sprites
-        //
-        // for (const sprite in sprites) {
-        //     sprites[sprite].tileset.imagen = new Image()
-        //     sprites[sprite].tileset.imagen.src = sprites[sprite].tileset.ruta
-        // }
-
         this.ancho = this.imagen.width
         this.altura = this.imagen.height
 
@@ -168,6 +161,12 @@ class Jugador extends Sprite {
 
     parar() {
         this.velocidad.x = 0
+    }
+
+    setSprite(sprite) {
+        this.ruta = sprite.src
+        this.framesMaxAnimacion = sprite.framesMaxAnimacion
+        this.framesEspera = sprite.framesEspera
     }
 
 }

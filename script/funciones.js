@@ -1,16 +1,33 @@
 const sprites = {
-    quieto:{
+    quieto: {
         src: "/imagenes/sprites/jugador/idle/Warrior_Idle_",
         framesMaxAnimacion: 6,
+        framesEspera: 10
     },
-    correr: {
-        src: "/imagenes/sprites/jugador/run/Warrior_Run_",
+    correrDerecha: {
+        src: "/imagenes/sprites/jugador/runRight/Warrior_Run_",
         framesMaxAnimacion: 8,
+        framesEspera: 5
+    },
+    correrIzquierda: {
+        src: "/imagenes/sprites/jugador/runLeft/Warrior_Run_",
+        framesMaxAnimacion: 8,
+        framesEspera: 5
     },
     agachar: {
-        tileset: "tileSet2",
+        src: "/imagenes/sprites/jugador/agachar/Warrior_Crouch_",
+        framesMaxAnimacion: 4,
+        framesEspera: 15
+    },
+    saltarDerecha: {
+        src: "/imagenes/sprites/jugador/saltarRight/Warrior_Jump_",
         framesMaxAnimacion: 3,
-        posicionVertical: 9
+        framesEspera: 15
+    },
+    saltarIzquierda: {
+        src: "/imagenes/sprites/jugador/saltarLeft/Warrior_Jump_",
+        framesMaxAnimacion: 3,
+        framesEspera: 15
     }
 }
 
@@ -19,6 +36,12 @@ const teclas = {
         pulsada: false
     },
     izquierda: {
+        pulsada: false
+    },
+    abajo: {
+        pulsada: false
+    },
+    arriba: {
         pulsada: false
     }
 }
@@ -42,7 +65,6 @@ function animar() {
 
     tilemap.render()
 
-
     plataformas.forEach(plataforma => {
 
         plataforma.render()
@@ -58,53 +80,59 @@ function animar() {
         // }else subiendoMapa = false
 
         //moviemiento del jugador
+        if (teclas.abajo.pulsada) {
 
-        if (teclas.izquierda.pulsada
-            && jugador.posicion.x > 400
-            && !jugador.haColisionado
-        ) {
-            jugador.ruta = sprites.correr.src
-            jugador.framesMaxAnimacion = sprites.correr.framesMaxAnimacion
-            jugador.moverIzquierda()
-        } else if (teclas.derecha.pulsada
-            && jugador.posicion.x < 800
-            && !jugador.haColisionado
-        ) {
-            jugador.ruta = sprites.correr.src
-            jugador.framesMaxAnimacion = sprites.correr.framesMaxAnimacion
-            jugador.moverDerecha()
+            if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarDerecha)
+            else jugador.setSprite(sprites.agachar)
+            jugador.velocidad.x = 0
+
         } else {
 
-            jugador.ruta = sprites.quieto.src
-            jugador.framesMaxAnimacion = sprites.quieto.framesMaxAnimacion
-            jugador.parar()
+            if (teclas.izquierda.pulsada && jugador.posicion.x > 400 && !jugador.haColisionado) {
 
-            if (teclas.derecha.pulsada
-                && !jugador.haColisionado) {
-                jugador.ruta = sprites.correr.src
-                jugador.framesMaxAnimacion = sprites.correr.framesMaxAnimacion
-                desplazamiento += 1
-                tilemap.posicion.x -= 0.005
-                tienda.posicion.x -= 0.005
-                plataformas.forEach(plataforma => {
-                    plataforma.posicion.x -= 0.005
-                })
+                if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarIzquierda)
+                if (jugador.sobrePlataforma) jugador.setSprite(sprites.correrIzquierda)
+                jugador.moverIzquierda()
 
-            }
-            if (teclas.izquierda.pulsada
-                && !jugador.haColisionado) {
-                jugador.ruta = sprites.correr.src
-                jugador.framesMaxAnimacion = sprites.correr.framesMaxAnimacion
-                desplazamiento -= 1
-                tilemap.posicion.x += 0.005
-                tienda.posicion.x += 0.005
-                plataformas.forEach(plataforma => {
-                    plataforma.posicion.x += 0.005
+            } else if (teclas.derecha.pulsada && jugador.posicion.x < 800 && !jugador.haColisionado) {
 
-                })
+                if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarDerecha)
+                if (jugador.sobrePlataforma) jugador.setSprite(sprites.correrDerecha)
+                jugador.moverDerecha()
+
+            } else {
+
+                if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarDerecha)
+                if (jugador.sobrePlataforma) jugador.setSprite(sprites.quieto)
+                jugador.parar()
+
+                if (teclas.derecha.pulsada && !jugador.haColisionado) {
+
+                    if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarDerecha)
+                    if (jugador.sobrePlataforma) jugador.setSprite(sprites.correrDerecha)
+                    desplazamiento += 1
+                    tilemap.posicion.x -= 0.005
+                    tienda.posicion.x -= 0.005
+                    plataformas.forEach(plataforma => {
+                        plataforma.posicion.x -= 0.005
+                    })
+
+                }
+                if (teclas.izquierda.pulsada && !jugador.haColisionado) {
+
+                    if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarIzquierda)
+                    if (jugador.sobrePlataforma) jugador.setSprite(sprites.correrIzquierda)
+                    desplazamiento -= 1
+                    tilemap.posicion.x += 0.005
+                    tienda.posicion.x += 0.005
+                    plataformas.forEach(plataforma => {
+                        plataforma.posicion.x += 0.005
+
+                    })
+
+                }
             }
         }
-
 
         //hitbox superior de la plataforma
 
@@ -168,6 +196,7 @@ addEventListener("keydown", ({key}) => {
     }
     switch (key) {
         case "w":
+            teclas.arriba.pulsada = true
             if (jugador.saltos === 1) {
                 jugador.saltar()
                 jugador.saltos = 0
@@ -180,8 +209,9 @@ addEventListener("keydown", ({key}) => {
             break
         case "s":
             if (jugador.sobrePlataforma || jugador.base === suelo) {
-                jugador.color = "#EAE2B7"
-                jugador.v = 3
+                teclas.abajo.pulsada = true
+                jugador.ruta = sprites.agachar.src
+                jugador.framesMaxAnimacion = sprites.agachar.framesMaxAnimacion
             }
             break
         case "a":
@@ -194,8 +224,11 @@ addEventListener("keydown", ({key}) => {
 })
 addEventListener("keyup", ({key}) => {
     switch (key) {
+        case "w":
+            teclas.arriba.pulsada = false
+            break
         case "s":
-            jugador.color = "#FCBF49"
+            teclas.abajo.pulsada = false
             jugador.v = 5
             break
         case "a":
@@ -206,9 +239,3 @@ addEventListener("keyup", ({key}) => {
             break
     }
 })
-
-function crearImagen(ruta) {
-    let imagen = new Image()
-    imagen.src = ruta
-    return imagen
-}
