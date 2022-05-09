@@ -149,10 +149,10 @@ function animar() {
 
         //hitbox inferior de la plataforma
         if (jugador.derecha >= plataforma.posicion.x
-                && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma
+            && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma
             && jugador.base > plataforma.bot
-            && jugador.posicion.y  <= plataforma.bot + 100
-        &&jugador.posicion.y  >= plataforma.posicion.y) {
+            && jugador.posicion.y <= plataforma.bot + 100
+            && jugador.posicion.y >= plataforma.posicion.y) {
             console.log("pabajo")
             jugador.velocidad.y += 0.5
         }
@@ -246,4 +246,12 @@ addEventListener("keyup", ({key}) => {
             teclas.derecha.pulsada = false
             break
     }
+})
+
+const jugar = document.querySelector(".jugar")
+
+jugar.addEventListener("click", () => {
+
+    canvas.style.display = "block"
+    intro.style.display = "none"
 })

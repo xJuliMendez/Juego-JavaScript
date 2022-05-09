@@ -1,5 +1,9 @@
 const canvas = document.querySelector('canvas')
 
+const intro = document.querySelector('.intro')
+
+canvas.style.display = "none"
+
 const c = canvas.getContext("2d")
 
 canvas.width = innerWidth //darle al canvas el ancho de toda la
@@ -25,4 +29,11 @@ const jugador = new Jugador({
 animar()
 
 
+addEventListener("keydown", (key) =>{
 
+    if (key.key === "Enter") {
+        canvas.style.display = "block"
+        intro.style.display = "none"
+    }
+
+})

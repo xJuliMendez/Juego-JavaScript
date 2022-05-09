@@ -104,6 +104,12 @@ class Jugador extends Sprite {
     }
 
     render() {
+        c.fillStyle = "rgba(0,255,0,0.4)"
+        c.fillRect(this.posicion.x,
+            this.posicion.y-this.altura,
+            this.ancho,
+            this.altura*2)
+
         c.drawImage(this.imagen,
             this.posicion.x - this.margenSprite.x,                                        //posicion del canvas en la que se va a colocar
             this.posicion.y - this.margenSprite.y,
@@ -192,7 +198,7 @@ class Plataforma {
 
     render() {
 
-        c.fillStyle = "rgba(0,255,0,0.0)"
+        c.fillStyle = "rgba(0,255,0,0.4)"
         c.fillRect(this.posicion.x, this.posicion.y, this.anchoPlataforma, this.altoPlataforma)
 
     }
