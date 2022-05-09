@@ -142,31 +142,39 @@ function animar() {
             && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma
         ) {
             jugador.sobrePlataforma = true
+            jugador.haColisionado = false
             jugador.velocidad.y = 0
         }
 
 
         //hitbox inferior de la plataforma
-        if (jugador.posicion.y <= plataforma.bot
-            && jugador.base >= plataforma.bot
-            && jugador.derecha >= plataforma.posicion.x
-            && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma
-            && !jugador.haColisionado
-        ) {
+        if (jugador.derecha >= plataforma.posicion.x
+                && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma
+            && jugador.base > plataforma.bot
+            && jugador.posicion.y  <= plataforma.bot + 100
+        &&jugador.posicion.y  >= plataforma.posicion.y) {
             console.log("pabajo")
-            jugador.velocidad.y = 2
+            jugador.velocidad.y += 0.5
         }
         //hitbox lateral de la plataforma desde abajo
-        if (jugador.base >= plataforma.top
-            && jugador.posicion.y <= plataforma.bot
-            && (jugador.derecha <= plataforma.posicion.x || jugador.posicion.x >= plataforma.posicion.x + plataforma.anchoPlataforma)
-            && (jugador.derecha >= plataforma.posicion.x && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma)
+        if ((jugador.derecha >= plataforma.posicion.x
+                && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma)
+            && (jugador.posicion.y > plataforma.bot || jugador.base > plataforma.posicion.y)
+            && !jugador.sobrePlataforma
+            && !jugador.haColisionado
         ) {
             console.log("quieto")
             jugador.haColisionado = true
-        } else {
-            jugador.haColisionado = false
         }
+
+        // if (jugador.sobrePlataforma
+        // &&(jugador.derecha >= plataforma.posicion.x
+        //         && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma)
+        //     && jugador.base >= plataforma.top
+        //     && jugador.posicion.y  <= plataforma.top){
+        //     console.log("columna")
+        //     jugador.haColisionado = true
+        // }
         // if (((jugador.posicion.y >= plataforma.top && jugador.posicion.y <= plataforma.base)
         //         || (jugador.base >= plataforma.top && jugador.base <= plataforma.top))
         //     && (jugador.derecha >= plataforma.posicion.x || jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma)
