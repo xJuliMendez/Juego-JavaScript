@@ -161,7 +161,6 @@ function animar() {
                 && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma)
             && (jugador.posicion.y > plataforma.bot || jugador.base > plataforma.posicion.y)
             && !jugador.sobrePlataforma
-            && !jugador.haColisionado
         ) {
             console.log("quieto")
             jugador.haColisionado = true
@@ -255,3 +254,4 @@ jugar.addEventListener("click", () => {
     canvas.style.display = "block"
     intro.style.display = "none"
 })
+

@@ -104,7 +104,7 @@ class Jugador extends Sprite {
     }
 
     render() {
-        c.fillStyle = "rgba(0,255,0,0.4)"
+        c.fillStyle = "rgba(0,255,0,0.0)"
         c.fillRect(this.posicion.x,
             this.posicion.y-this.altura,
             this.ancho,
@@ -198,7 +198,7 @@ class Plataforma {
 
     render() {
 
-        c.fillStyle = "rgba(0,255,0,0.4)"
+        c.fillStyle = "rgba(0,255,0,0.0)"
         c.fillRect(this.posicion.x, this.posicion.y, this.anchoPlataforma, this.altoPlataforma)
 
     }

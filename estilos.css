@@ -6,6 +6,9 @@
     margin: 0;
 }
 
+/**, *::after, *::before{*/
+/*    box-sizing: border-box;*/
+/*}*/
 canvas {
     background-color: #003049;
 }
@@ -51,7 +54,6 @@ body {
     font-weight: 700;
 }
 
-
 a {
     color: inherit;
     text-decoration: none;
@@ -62,14 +64,12 @@ li {
     margin: 0 2rem;
 }
 
-/* Underline styles */
 a {
     display: block;
     position: relative;
     padding: 0.2em 0;
 }
 
-/* Fade in */
 a::after {
     content: '';
     position: absolute;
@@ -77,7 +77,7 @@ a::after {
     left: 0;
     width: 100%;
     height: 0.1em;
-    background-color: rgba(173,180,167, 0.6);
+    background-color: rgba(173, 180, 167, 0.6);
     opacity: 0;
     transition: opacity 300ms, transform 300ms;
 }
@@ -85,4 +85,61 @@ a::after {
 a:hover::after,
 a:focus::after {
     opacity: 1;
+}
+
+.popup {
+    font-size: 30px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 10;
+    background-color: rgba(173, 180, 167, 1);
+    height: 80vh;
+    width: 80%;
+}
+
+.popup-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.popup-header .title {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.popup-header .cerrar {
+
+    font-size: 70px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-weight: bold;
+}
+
+.popup-body {
+
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+}
+#overlay.active{
+    opacity: 1;
+    pointer-events: all;
 }
