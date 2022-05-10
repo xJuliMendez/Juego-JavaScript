@@ -133,12 +133,13 @@ a:focus::after {
 }
 
 .hoguera{
+    z-index: 9;
     width: 60%;
     height: 12vh;
     display: none;
     background-color: rgba(173, 180, 167, 0.5);
     border-radius: 10px;
-    position: fixed;
+    position: absolute;
     top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);

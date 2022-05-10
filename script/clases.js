@@ -7,8 +7,7 @@ class Sprite {
                     framesMaxAnimacion = 1,
                     framesVerticales = 1,
                     posicionVertical = 0,
-                    margenSprite = {x: 0, y: 0},
-                    encontrada = false
+                    margenSprite = {x: 0, y: 0}
                 }) {
 
         this.posicion = {
@@ -26,7 +25,6 @@ class Sprite {
         this.framesTranscurridos = 0
         this.framesEspera = 10
         this.margenSprite = margenSprite
-        this.encontrada = encontrada
     }
 
     render() {
@@ -184,7 +182,10 @@ class Plataforma {
     static ancho = 69
     static alto = 72
 
-    constructor({posicion}) {
+    constructor({
+                    posicion,
+                    encendida = false
+                }) {
 
         this.posicion = {
             x: posicion.x,
@@ -192,6 +193,8 @@ class Plataforma {
         }
         this.anchoPlataforma = 69
         this.altoPlataforma = 72
+
+        this.encendida = encendida
 
         this.top = this.posicion.y
         this.bot = this.posicion.y + this.altoPlataforma

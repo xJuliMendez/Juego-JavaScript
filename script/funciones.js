@@ -1,4 +1,5 @@
-const hoguera = document.querySelector(".hoguera")
+const hogueraApagada = document.querySelector("#hogueraApagada")
+const hogueraEncendida = document.querySelector("#hogueraEncendida")
 
 const sprites = {
     quieto: {
@@ -46,7 +47,7 @@ const teclas = {
     arriba: {
         pulsada: false
     },
-    q:{
+    q: {
         pulsada: false
     }
 }
@@ -70,7 +71,7 @@ function animar() {
 
     tilemap.render()
 
-    checkpoints.forEach(checkpoints =>{
+    checkpoints.forEach(checkpoints => {
         checkpoints.render()
     })
 
@@ -124,7 +125,7 @@ function animar() {
                     plataformas.forEach(plataforma => {
                         plataforma.posicion.x -= 0.005
                     })
-                    checkpoints.forEach(cpoint =>{
+                    checkpoints.forEach(cpoint => {
                         cpoint.posicion.x -= 0.005
                     })
                 }
@@ -137,7 +138,7 @@ function animar() {
                     plataformas.forEach(plataforma => {
                         plataforma.posicion.x += 0.005
                     })
-                    checkpoints.forEach(cpoint =>{
+                    checkpoints.forEach(cpoint => {
                         cpoint.posicion.x += 0.005
                     })
                 }
@@ -195,24 +196,38 @@ function animar() {
 
     })
 
-    checkpoints.forEach(cpoint =>{
+    checkpoints.forEach(cpoint => {
 
         if ((jugador.derecha >= cpoint.posicion.x
-            && jugador.posicion.x <= cpoint.posicion.x + cpoint.anchoPlataforma)){
+            && jugador.posicion.x <= cpoint.posicion.x + cpoint.anchoPlataforma)) {
 
-            console.log("holi")
+            if (cpoint.encendida) {
+                hogueraEncendida.style.display = "block"
+            } else hogueraApagada.style.display = "block"
 
-            hoguera.style.display = "block"
 
-            addEventListener("keydown", ({key})=>{
-                console.log(key)
-                if (key == "q"){
-                    hoguera.closest("div").innerText = "Lampara encendida. Punto de aparicion reestablecido"
+            addEventListener("keydown", ({key}) => {
+                if (key === "q") {
+
+                    console.log(jugador.derecha + " || " + cpoint.posicion.x)
+
+                    if ((jugador.derecha >= cpoint.posicion.x
+                        && jugador.posicion.x <= cpoint.posicion.x + cpoint.anchoPlataforma)) {
+                        hogueraEncendida.style.display = "block"
+                        hogueraApagada.style.display = "none"
+                        cpoint.encendida = true
+                    }
+
                 }
-                hoguera.encendida = true
+
             })
 
-        }else hoguera.style.display = "none"
+        } else {
+            hogueraApagada.style.display = "none"
+            hogueraEncendida.style.display = "none"
+        }
+
+
     })
 
 
@@ -258,6 +273,11 @@ addEventListener("keydown", ({key}) => {
             teclas.derecha.pulsada = true
             break
         case "q":
+
+            checkpoints.forEach(cpoint => {
+                console.log(cpoint)
+            })
+
             teclas.q.pulsada = true
             break
     }
