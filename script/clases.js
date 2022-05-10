@@ -7,7 +7,8 @@ class Sprite {
                     framesMaxAnimacion = 1,
                     framesVerticales = 1,
                     posicionVertical = 0,
-                    margenSprite = {x: 0, y: 0}
+                    margenSprite = {x: 0, y: 0},
+                    encontrada = false
                 }) {
 
         this.posicion = {
@@ -25,6 +26,7 @@ class Sprite {
         this.framesTranscurridos = 0
         this.framesEspera = 10
         this.margenSprite = margenSprite
+        this.encontrada = encontrada
     }
 
     render() {
@@ -106,9 +108,9 @@ class Jugador extends Sprite {
     render() {
         c.fillStyle = "rgba(0,255,0,0.0)"
         c.fillRect(this.posicion.x,
-            this.posicion.y-this.altura,
+            this.posicion.y - this.altura,
             this.ancho,
-            this.altura*2)
+            this.altura * 2)
 
         c.drawImage(this.imagen,
             this.posicion.x - this.margenSprite.x,                                        //posicion del canvas en la que se va a colocar
@@ -177,7 +179,6 @@ class Jugador extends Sprite {
 
 }
 
-
 class Plataforma {
 
     static ancho = 69
@@ -198,7 +199,7 @@ class Plataforma {
 
     render() {
 
-        c.fillStyle = "rgba(0,255,0,0.0)"
+        c.fillStyle = "rgba(0,255,0,0.5)"
         c.fillRect(this.posicion.x, this.posicion.y, this.anchoPlataforma, this.altoPlataforma)
 
     }

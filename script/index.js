@@ -16,7 +16,7 @@ const suelo = canvas.height
 const jugador = new Jugador({
     spriteSet: "/imagenes/sprites/jugador/idle/Warrior_Idle_",
     posicion: {
-        x: 1100,
+        x: 200,
         y: 200
     },
     escala: 3,
@@ -24,13 +24,3 @@ const jugador = new Jugador({
 })
 
 animar()
-
-
-addEventListener("keydown", ({key}) => {
-
-    if (key === "Enter") {
-        canvas.style.display = "block"
-        intro.style.display = "none"
-    }
-
-})

@@ -1,3 +1,5 @@
+const hoguera = document.querySelector(".hoguera")
+
 const sprites = {
     quieto: {
         src: "/imagenes/sprites/jugador/idle/Warrior_Idle_",
@@ -43,6 +45,9 @@ const teclas = {
     },
     arriba: {
         pulsada: false
+    },
+    q:{
+        pulsada: false
     }
 }
 
@@ -64,6 +69,10 @@ function animar() {
     jugador.actualizar()
 
     tilemap.render()
+
+    checkpoints.forEach(checkpoints =>{
+        checkpoints.render()
+    })
 
     plataformas.forEach(plataforma => {
 
@@ -89,13 +98,13 @@ function animar() {
         } else {
 
             if (teclas.izquierda.pulsada && jugador.posicion.x > 400 && !jugador.haColisionado) {
-
+                desplazamiento -= 1
                 if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarIzquierda)
                 if (jugador.sobrePlataforma) jugador.setSprite(sprites.correrIzquierda)
                 jugador.moverIzquierda()
 
             } else if (teclas.derecha.pulsada && jugador.posicion.x < 800 && !jugador.haColisionado) {
-
+                desplazamiento += 5
                 if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarDerecha)
                 if (jugador.sobrePlataforma) jugador.setSprite(sprites.correrDerecha)
                 jugador.moverDerecha()
@@ -107,29 +116,30 @@ function animar() {
                 jugador.parar()
 
                 if (teclas.derecha.pulsada && !jugador.haColisionado) {
-
+                    desplazamiento += 5
                     if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarDerecha)
                     if (jugador.sobrePlataforma) jugador.setSprite(sprites.correrDerecha)
-                    desplazamiento += 1
                     tilemap.posicion.x -= 0.005
                     tienda.posicion.x -= 0.005
                     plataformas.forEach(plataforma => {
                         plataforma.posicion.x -= 0.005
                     })
-
+                    checkpoints.forEach(cpoint =>{
+                        cpoint.posicion.x -= 0.005
+                    })
                 }
                 if (teclas.izquierda.pulsada && !jugador.haColisionado) {
 
                     if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarIzquierda)
                     if (jugador.sobrePlataforma) jugador.setSprite(sprites.correrIzquierda)
-                    desplazamiento -= 1
                     tilemap.posicion.x += 0.005
                     tienda.posicion.x += 0.005
                     plataformas.forEach(plataforma => {
                         plataforma.posicion.x += 0.005
-
                     })
-
+                    checkpoints.forEach(cpoint =>{
+                        cpoint.posicion.x += 0.005
+                    })
                 }
             }
         }
@@ -185,6 +195,26 @@ function animar() {
 
     })
 
+    checkpoints.forEach(cpoint =>{
+
+        if ((jugador.derecha >= cpoint.posicion.x
+            && jugador.posicion.x <= cpoint.posicion.x + cpoint.anchoPlataforma)){
+
+            console.log("holi")
+
+            hoguera.style.display = "block"
+
+            addEventListener("keydown", ({key})=>{
+                console.log(key)
+                if (key == "q"){
+                    hoguera.closest("div").innerText = "Lampara encendida. Punto de aparicion reestablecido"
+                }
+                hoguera.encendida = true
+            })
+
+        }else hoguera.style.display = "none"
+    })
+
 
     if (desplazamiento >= 2000) {
         // console.log("VICTORIA")
@@ -227,6 +257,9 @@ addEventListener("keydown", ({key}) => {
         case "d":
             teclas.derecha.pulsada = true
             break
+        case "q":
+            teclas.q.pulsada = true
+            break
     }
 })
 addEventListener("keyup", ({key}) => {
@@ -244,14 +277,8 @@ addEventListener("keyup", ({key}) => {
         case "d":
             teclas.derecha.pulsada = false
             break
+        case "q":
+            teclas.q.pulsada = false
+            break
     }
 })
-
-const jugar = document.querySelector(".jugar")
-
-jugar.addEventListener("click", () => {
-
-    canvas.style.display = "block"
-    intro.style.display = "none"
-})
-

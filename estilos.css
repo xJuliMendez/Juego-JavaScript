@@ -29,9 +29,9 @@ canvas {
 }
 
 .intro div {
-    cursor: pointer;
     display: flex;
     justify-content: center;
+    cursor: pointer;
     width: fit-content;
 }
 
@@ -59,11 +59,6 @@ a {
     text-decoration: none;
 }
 
-
-li {
-    margin: 0 2rem;
-}
-
 a {
     display: block;
     position: relative;
@@ -88,6 +83,7 @@ a:focus::after {
 }
 
 .popup {
+    display: none;
     font-size: 30px;
     position: fixed;
     top: 50%;
@@ -125,21 +121,28 @@ a:focus::after {
 }
 
 .popup-body {
-
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
 }
 
-#overlay {
+.reiniciar{
+    align-self: center;
+    cursor: pointer;
+}
+
+.hoguera{
+    width: 60%;
+    height: 12vh;
+    display: none;
+    background-color: rgba(173, 180, 167, 0.5);
+    border-radius: 10px;
     position: fixed;
-    opacity: 0;
-    transition: 200ms ease-in-out;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, .5);
-    pointer-events: none;
-}
-#overlay.active{
-    opacity: 1;
-    pointer-events: all;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    justify-items: center;
+    align-items: center;
 }
