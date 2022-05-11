@@ -1,6 +1,8 @@
 const hogueraApagada = document.querySelector("#hogueraApagada")
 const hogueraEncendida = document.querySelector("#hogueraEncendida")
 
+const velocidadPlataformas = 0.018
+
 const sprites = {
     quieto: {
         src: "/imagenes/sprites/jugador/idle/Warrior_Idle_",
@@ -56,6 +58,9 @@ var desplazamiento = 0
 
 let subiendoMapa = false
 
+let reiniciando = false
+
+
 function animar() {
 
     window.requestAnimationFrame(animar)
@@ -67,13 +72,8 @@ function animar() {
 
     tienda.actualizar()
 
-    jugador.actualizar()
-
     tilemap.render()
 
-    checkpoints.forEach(checkpoints => {
-        checkpoints.render()
-    })
 
     plataformas.forEach(plataforma => {
 
@@ -120,26 +120,26 @@ function animar() {
                     desplazamiento += 5
                     if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarDerecha)
                     if (jugador.sobrePlataforma) jugador.setSprite(sprites.correrDerecha)
-                    tilemap.posicion.x -= 0.005
-                    tienda.posicion.x -= 0.005
+                    tilemap.posicion.x -= velocidadPlataformas
+                    tienda.posicion.x -= velocidadPlataformas
                     plataformas.forEach(plataforma => {
-                        plataforma.posicion.x -= 0.005
+                        plataforma.posicion.x -= velocidadPlataformas
                     })
                     checkpoints.forEach(cpoint => {
-                        cpoint.posicion.x -= 0.005
+                        cpoint.posicion.x -= velocidadPlataformas
                     })
                 }
                 if (teclas.izquierda.pulsada && !jugador.haColisionado) {
 
                     if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarIzquierda)
                     if (jugador.sobrePlataforma) jugador.setSprite(sprites.correrIzquierda)
-                    tilemap.posicion.x += 0.005
-                    tienda.posicion.x += 0.005
+                    tilemap.posicion.x += velocidadPlataformas
+                    tienda.posicion.x += velocidadPlataformas
                     plataformas.forEach(plataforma => {
-                        plataforma.posicion.x += 0.005
+                        plataforma.posicion.x += velocidadPlataformas
                     })
                     checkpoints.forEach(cpoint => {
-                        cpoint.posicion.x += 0.005
+                        cpoint.posicion.x += velocidadPlataformas
                     })
                 }
             }
@@ -159,23 +159,23 @@ function animar() {
 
 
         //hitbox inferior de la plataforma
-        if (jugador.derecha >= plataforma.posicion.x
-            && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma
-            && jugador.base > plataforma.bot
-            && jugador.posicion.y <= plataforma.bot + 100
-            && jugador.posicion.y >= plataforma.posicion.y) {
-            console.log("pabajo")
-            jugador.velocidad.y += 0.5
-        }
+        // if (jugador.derecha >= plataforma.posicion.x
+        //     && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma
+        //     && jugador.base > plataforma.bot
+        //     && jugador.posicion.y <= plataforma.bot + 100
+        //     && jugador.posicion.y >= plataforma.posicion.y) {
+        //     console.log("pabajo")
+        //     jugador.velocidad.y += 0.5
+        // }
         //hitbox lateral de la plataforma desde abajo
-        if ((jugador.derecha >= plataforma.posicion.x
-                && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma)
-            && (jugador.posicion.y > plataforma.bot || jugador.base > plataforma.posicion.y)
-            && !jugador.sobrePlataforma
-        ) {
-            console.log("quieto")
-            jugador.haColisionado = true
-        }
+        // if ((jugador.derecha >= plataforma.posicion.x
+        //         && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma)
+        //     && (jugador.posicion.y > plataforma.bot || jugador.base > plataforma.posicion.y)
+        //     && !jugador.sobrePlataforma
+        // ) {
+        //     console.log("quieto")
+        //     jugador.haColisionado = true
+        // }
 
         // if (jugador.sobrePlataforma
         // &&(jugador.derecha >= plataforma.posicion.x
@@ -196,14 +196,21 @@ function animar() {
 
     })
 
+    jugador.actualizar()
+
+    checkpoints.forEach(checkpoints => {
+        checkpoints.render()
+    })
+
+
     checkpoints.forEach(cpoint => {
 
         if ((jugador.derecha >= cpoint.posicion.x
             && jugador.posicion.x <= cpoint.posicion.x + cpoint.anchoPlataforma)) {
 
             if (cpoint.encendida) {
-                hogueraEncendida.style.display = "block"
-            } else hogueraApagada.style.display = "block"
+                hogueraEncendida.classList.add("display")
+            } else hogueraApagada.classList.add("display")
 
 
             addEventListener("keydown", ({key}) => {
@@ -213,23 +220,33 @@ function animar() {
 
                     if ((jugador.derecha >= cpoint.posicion.x
                         && jugador.posicion.x <= cpoint.posicion.x + cpoint.anchoPlataforma)) {
-                        hogueraEncendida.style.display = "block"
-                        hogueraApagada.style.display = "none"
+                        hogueraEncendida.classList.add("display")
+                        hogueraApagada.classList.remove("display")
                         cpoint.encendida = true
+                        checkpoints.forEach(points => {
+                            if (points != cpoint) {
+                                points.encendida = false
+                            }
+                        })
                     }
 
                 }
 
             })
 
-        } else {
-            hogueraApagada.style.display = "none"
-            hogueraEncendida.style.display = "none"
+        } else if (jugador.derecha >= cpoint.posicion.x + cpoint.anchoPlataforma
+            && jugador.posicion.x >= cpoint.posicion.x) {
+            hogueraApagada.classList.remove("display")
+            hogueraEncendida.classList.remove("display")
         }
 
 
     })
 
+    if (jugador.base >= suelo - 2 && !reiniciando) {
+        reiniciando = true
+        reiniciarMapa()
+    }
 
     if (desplazamiento >= 2000) {
         // console.log("VICTORIA")
@@ -240,65 +257,67 @@ function animar() {
 
 addEventListener("keydown", ({key}) => {
 
-    if (jugador.base >= suelo - 2) {
-        console.log("suelo")
-        jugador.haColisionado = false
-        jugador.sobrePlataforma = false
-        jugador.saltos = 0
-    }
-    switch (key) {
-        case "w":
-            teclas.arriba.pulsada = true
-            if (jugador.saltos === 1) {
-                jugador.saltar()
-                jugador.saltos = 0
-            }
-            if ((jugador.base >= suelo || jugador.sobrePlataforma) && jugador.saltos === 0) {
-                jugador.saltar()
-                jugador.saltos = 1
-                jugador.sobrePlataforma = false
-            }
-            break
-        case "s":
-            if (jugador.sobrePlataforma || jugador.base === suelo) {
-                teclas.abajo.pulsada = true
-                jugador.ruta = sprites.agachar.src
-                jugador.framesMaxAnimacion = sprites.agachar.framesMaxAnimacion
-            }
-            break
-        case "a":
-            teclas.izquierda.pulsada = true
-            break
-        case "d":
-            teclas.derecha.pulsada = true
-            break
-        case "q":
 
-            checkpoints.forEach(cpoint => {
-                console.log(cpoint)
-            })
+    if (!reiniciando) {
+        switch (key) {
+            case "w":
+                teclas.arriba.pulsada = true
+                if (jugador.saltos === 1) {
+                    jugador.saltar()
+                    jugador.saltos = 0
+                }
+                if ((jugador.base >= suelo || jugador.sobrePlataforma) && jugador.saltos === 0) {
+                    jugador.saltar()
+                    jugador.saltos = 1
+                    jugador.sobrePlataforma = false
+                }
+                break
+            case "s":
+                if (jugador.sobrePlataforma || jugador.base === suelo) {
+                    teclas.abajo.pulsada = true
+                    jugador.ruta = sprites.agachar.src
+                    jugador.framesMaxAnimacion = sprites.agachar.framesMaxAnimacion
+                }
+                break
+            case "a":
+                teclas.izquierda.pulsada = true
+                break
+            case "d":
+                teclas.derecha.pulsada = true
+                break
+            case "q":
 
-            teclas.q.pulsada = true
-            break
-    }
+                console.log(posicionHogueras)
+
+                checkpoints.forEach(cpoint => {
+                    console.log(cpoint)
+                })
+
+                teclas.q.pulsada = true
+                break
+        }
+    }else jugador.parar()
+
 })
 addEventListener("keyup", ({key}) => {
-    switch (key) {
-        case "w":
-            teclas.arriba.pulsada = false
-            break
-        case "s":
-            teclas.abajo.pulsada = false
-            jugador.v = 5
-            break
-        case "a":
-            teclas.izquierda.pulsada = false
-            break
-        case "d":
-            teclas.derecha.pulsada = false
-            break
-        case "q":
-            teclas.q.pulsada = false
-            break
-    }
+    if (!reiniciando) {
+        switch (key) {
+            case "w":
+                teclas.arriba.pulsada = false
+                break
+            case "s":
+                teclas.abajo.pulsada = false
+                jugador.v = 5
+                break
+            case "a":
+                teclas.izquierda.pulsada = false
+                break
+            case "d":
+                teclas.derecha.pulsada = false
+                break
+            case "q":
+                teclas.q.pulsada = false
+                break
+        }
+    }jugador.parar()
 })

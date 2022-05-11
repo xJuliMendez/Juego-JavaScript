@@ -13,7 +13,8 @@ const gravedad = .6
 
 const suelo = canvas.height
 
-const jugador = new Jugador({
+
+const jugador  = new Jugador({
     spriteSet: "/imagenes/sprites/jugador/idle/Warrior_Idle_",
     posicion: {
         x: 200,
@@ -22,5 +23,19 @@ const jugador = new Jugador({
     escala: 3,
     margenSprite: {x: 50, y: 85}
 })
+
+
+if (localStorage.getItem("respawn")) {
+
+
+    tilemap.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
+    plataformas.forEach(plat => {
+        plat.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
+    })
+    checkpoints.forEach(cpoint => {
+        cpoint.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
+    })
+
+}
 
 animar()

@@ -154,7 +154,7 @@ class Jugador extends Sprite {
     }
 
     saltar() {
-        this.velocidad.y = -15
+        this.velocidad.y = -12
     }
 
     moverDerecha() {
@@ -179,22 +179,24 @@ class Jugador extends Sprite {
 
 class Plataforma {
 
-    static ancho = 69
-    static alto = 72
+    static ancho = 40.8  //24 ancho de los pixeles por 1.65 que es el escalado que he aplicado en la imagen
+    static alto = 41
 
     constructor({
                     posicion,
-                    encendida = false
+                    encendida = false,
+                    numeroDeHoguera = 0
                 }) {
 
         this.posicion = {
             x: posicion.x,
             y: posicion.y
         }
-        this.anchoPlataforma = 69
-        this.altoPlataforma = 72
+        this.anchoPlataforma =41
+        this.altoPlataforma = 40
 
         this.encendida = encendida
+        this.numeroDeHoguera = numeroDeHoguera
 
         this.top = this.posicion.y
         this.bot = this.posicion.y + this.altoPlataforma

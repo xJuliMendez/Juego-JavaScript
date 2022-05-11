@@ -16,9 +16,10 @@ const menuEsc = document.querySelector("#menuEsc")
 
 const menuControles = document.querySelector("#menuControles")
 
-
 const reiniciar = document.querySelector(".reiniciar")
 
+const hasMuerto = document.querySelector(".hasmuerto")
+hasMuerto.style.display = "none"
 const localStorage = window.localStorage
 
 let cargarMenu = localStorage.getItem("cargarMenu")
@@ -33,10 +34,47 @@ if (cargarMenu) {
 }
 
 
+function reiniciarMapa(){
+
+    let hogueraEncendida
+
+    checkpoints.forEach(cpoint =>{
+        if (cpoint.encendida){
+            hogueraEncendida = cpoint.numeroDeHoguera
+        }
+    })
+
+    cargar = true
+    if (hogueraEncendida != null)localStorage.setItem("respawn", hogueraEncendida)
+
+    if (reiniciando)
+    {
+        hasMuerto.style.display = "block"
+        hasMuerto.classList.add("animacionMuerte")
+        demo()
+    }else demo(0)
+
+
+
+
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function demo(tiempo = 4) {
+    for (let i = 0; i < tiempo; i++) {
+        await sleep(i * 1000);
+    }
+
+    localStorage.setItem("cargarMenu", false)
+    location.reload()
+}
+
 reiniciar.addEventListener("click", ({key}) => {
-        cargar = true
-        localStorage.setItem("cargarMenu", false)
-        location.reload()
+
+    reiniciarMapa()
 
 })
 
