@@ -79,16 +79,6 @@ function animar() {
 
         plataforma.render()
 
-        // if (jugador.posicion.y >= 650) {
-        //     tienda.posicion.y -= 0.01
-        //     tilemap.posicion.y -= 0.01
-        //     plataformas.forEach(plataforma => {
-        //         plataforma.posicion.y -= 0.01
-        //     })
-        //     subiendoMapa = true
-        //     jugador.margenSprite.y -= 1
-        // }else subiendoMapa = false
-
         //moviemiento del jugador
         if (teclas.abajo.pulsada) {
 
@@ -128,6 +118,9 @@ function animar() {
                     checkpoints.forEach(cpoint => {
                         cpoint.posicion.x -= velocidadPlataformas
                     })
+                    magos.forEach(mago =>{
+                        mago.posicion.x -= velocidadPlataformas
+                    })
                 }
                 if (teclas.izquierda.pulsada && !jugador.haColisionado) {
 
@@ -140,6 +133,9 @@ function animar() {
                     })
                     checkpoints.forEach(cpoint => {
                         cpoint.posicion.x += velocidadPlataformas
+                    })
+                    magos.forEach(mago =>{
+                        mago.posicion.x += velocidadPlataformas
                     })
                 }
             }
@@ -202,6 +198,9 @@ function animar() {
         checkpoints.render()
     })
 
+    magos.forEach(esqueleto =>{
+        esqueleto.render()
+    })
 
     checkpoints.forEach(cpoint => {
 
@@ -247,6 +246,8 @@ function animar() {
     //     reiniciando = true
     //     reiniciarMapa()
     // }
+
+
 
     if (desplazamiento >= 2000) {
         // console.log("VICTORIA")

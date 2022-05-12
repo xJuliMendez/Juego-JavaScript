@@ -50,4 +50,60 @@ if (localStorage.getItem("respawn")) {
 
 }
 
+const magos = []
+
+
+
+let mago1 = new Jugador2({
+    ruta: "/imagenes/sprites/EVil Wizard 2/Sprites/Idle.png",
+    posicion: {
+        x: 800,
+        y: 480
+    },
+    escala: 2,
+    framesHorizontales: 8,
+    framesVerticales: 1,
+    margenSprite: {x: 0, y: 0}
+})
+
+let mago2 = new Jugador2({
+    ruta: "/imagenes/sprites/EVil Wizard 2/Sprites/Idle.png",
+    posicion: {
+        x: 1800,
+        y: 33
+    },
+    escala: 2,
+    framesHorizontales: 8,
+    framesVerticales: 1,
+    margenSprite: {x: 0, y: 0}
+})
+
+let mago3 = new Jugador2({
+    ruta: "/imagenes/sprites/EVil Wizard 2/Sprites/Idle.png",
+    posicion: {
+        x: 3650,
+        y: 280
+    },
+    escala: 2,
+    framesHorizontales: 8,
+    framesVerticales: 1,
+    margenSprite: {x: 0, y: 0}
+})
+
+let mago4 = new Jugador2({
+    ruta: "/imagenes/sprites/EVil Wizard 2/Sprites/Idle.png",
+    posicion: {
+        x: 6200,
+        y: 35
+    },
+    escala: 2,
+    framesHorizontales: 8,
+    framesVerticales: 1,
+    margenSprite: {x: 0, y: 0}
+})
+
+magos.push(mago1,mago2,mago3,mago4)
+
+console.log(magos)
+
 animar()

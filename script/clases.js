@@ -246,7 +246,7 @@ class Jugador2 extends Sprite {
         this.framesEspera = 10
 
         this.ancho = this.imagen.width / this.framesHorizontales
-        this.altura = this.imagen.height / this.framesVerticales
+        this.altura = this.imagen.height
 
         this.derecha = this.oDerecha = this.posicion.x + this.ancho
         this.base = this.oBase = this.posicion.y + this.altura
