@@ -243,10 +243,10 @@ function animar() {
 
     })
 
-    if (jugador.base >= suelo - 2 && !reiniciando) {
-        reiniciando = true
-        reiniciarMapa()
-    }
+    // if (jugador.base >= suelo - 2 && !reiniciando) {
+    //     reiniciando = true
+    //     reiniciarMapa()
+    // }
 
     if (desplazamiento >= 2000) {
         // console.log("VICTORIA")
@@ -321,3 +321,4 @@ addEventListener("keyup", ({key}) => {
         }
     }jugador.parar()
 })
+

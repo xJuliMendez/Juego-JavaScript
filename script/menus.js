@@ -10,8 +10,6 @@ const abrirPersonaje = document.querySelector(".historia")
 
 const cerrarPopup = document.querySelectorAll(".cerrar")
 
-const elegirPersonaje = document.querySelector("#elegirPersonaje")
-
 const menuEsc = document.querySelector("#menuEsc")
 
 const menuControles = document.querySelector("#menuControles")
@@ -55,8 +53,6 @@ function reiniciarMapa(){
     }else demo(0)
 
 
-
-
 }
 
 function sleep(ms) {
@@ -93,10 +89,6 @@ window.onbeforeunload = () => {
         localStorage.clear()
     }
 }
-
-abrirPersonaje.addEventListener("click", () => {
-    elegirPersonaje.style.display = "block"
-})
 
 cerrarPopup.forEach(cerrar => {
 

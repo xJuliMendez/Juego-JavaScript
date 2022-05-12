@@ -204,9 +204,95 @@ class Plataforma {
 
     render() {
 
-        c.fillStyle = "rgba(0,255,0,0.5)"
+        c.fillStyle = "rgba(0,255,0,0.0)"
         c.fillRect(this.posicion.x, this.posicion.y, this.anchoPlataforma, this.altoPlataforma)
 
     }
 
 }
+class Jugador2 extends Sprite {
+    constructor({
+                    ruta,
+                    posicion,
+                    escala = 1,
+                    framesHorizontales = 1,
+                    framesMaxAnimacion = 6,
+                    framesVerticales = 8,
+                    margenSprite = {x: 0, y: 0}
+                }) {
+
+        super({
+            ruta,
+            posicion,
+            escala,
+            framesHorizontales,
+            framesVerticales,
+            margenSprite
+        })
+
+        this.oPosicion = {
+            x: this.posicion.x,
+            y: this.posicion.y
+        }
+        this.velocidad = {
+            x: 0,
+            y: 10
+        }
+
+        this.posicionVertical = 0
+        this.framesMaxAnimacion = framesMaxAnimacion
+        this.frameActual = 0
+        this.framesTranscurridos = 0
+        this.framesEspera = 10
+
+        this.ancho = this.imagen.width / this.framesHorizontales
+        this.altura = this.imagen.height / this.framesVerticales
+
+        this.derecha = this.oDerecha = this.posicion.x + this.ancho
+        this.base = this.oBase = this.posicion.y + this.altura
+
+        this.saltos = 0
+        this.sobrePlataforma = false
+        this.haColisionado = false
+    }
+
+    actualizar() {
+        this.render()
+        this.actualizarFrames()
+
+        this.oPosicion.x = this.posicion.x
+        this.oPosicion.y = this.posicion.y
+        this.oBase = this.base
+        this.oDerecha = this.derecha
+
+        this.posicion.y += this.velocidad.y
+        this.posicion.x += this.velocidad.x
+        this.derecha = this.posicion.x + this.ancho
+        this.base = this.posicion.y + this.altura
+
+
+        if ((this.base + this.velocidad.y <= canvas.height) && !subiendoMapa) {
+            this.velocidad.y += gravedad
+        } else this.velocidad.y = 0
+
+
+    }
+
+    saltar() {
+        this.velocidad.y = -15
+    }
+
+    moverDerecha() {
+        this.velocidad.x = 5
+    }
+
+    moverIzquierda() {
+        this.velocidad.x = -5
+    }
+
+    parar() {
+        this.velocidad.x = 0
+    }
+
+}
+
