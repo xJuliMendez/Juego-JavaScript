@@ -36,23 +36,6 @@ const jugador = new Jugador({
 // })
 
 
-if (localStorage.getItem("respawn")) {
-
-
-    tilemap.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
-    tienda.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
-    plataformas.forEach(plat => {
-        plat.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
-    })
-    checkpoints.forEach(cpoint => {
-        cpoint.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
-    })
-
-}
-
-const magos = []
-
-
 
 let mago1 = new Jugador2({
     ruta: "/imagenes/sprites/EVil Wizard 2/Sprites/Idle.png",
@@ -102,7 +85,27 @@ let mago4 = new Jugador2({
     margenSprite: {x: 0, y: 0}
 })
 
+
+const magos = []
+
 magos.push(mago1,mago2,mago3,mago4)
+
+if (localStorage.getItem("respawn")) {
+
+
+    tilemap.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
+    tienda.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
+    plataformas.forEach(plat => {
+        plat.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
+    })
+    checkpoints.forEach(cpoint => {
+        cpoint.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
+    })
+    magos.forEach(mago =>{
+        mago.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
+    })
+}
+
 
 console.log(magos)
 

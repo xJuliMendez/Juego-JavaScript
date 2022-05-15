@@ -242,10 +242,10 @@ function animar() {
 
     })
 
-    // if (jugador.base >= suelo - 2 && !reiniciando) {
-    //     reiniciando = true
-    //     reiniciarMapa()
-    // }
+    if (jugador.base >= suelo - 2 && !reiniciando) {
+        reiniciando = true
+        reiniciarMapa()
+    }
 
 
 
