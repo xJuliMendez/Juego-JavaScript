@@ -1,8 +1,5 @@
-const hogueraApagada = document.querySelector("#hogueraApagada")
-const hogueraEncendida = document.querySelector("#hogueraEncendida")
-
 const velocidadPlataformas = 0.018
-
+//sprites del jugador
 const sprites = {
     quieto: {
         src: "/imagenes/sprites/jugador/idle/Warrior_Idle_",
@@ -46,6 +43,7 @@ const sprites = {
     }
 }
 
+//teclas que se usan durante la ejecucion
 const teclas = {
     derecha: {
         pulsada: false
@@ -67,10 +65,10 @@ const teclas = {
     }
 }
 
-var desplazamiento = 0
-
 let reiniciando = false
 
+let finalizado = false
+let dentrofinal = false
 
 function animar() {
 
@@ -84,7 +82,6 @@ function animar() {
     tienda.actualizar()
 
     tilemap.render()
-
 
     plataformas.forEach(plataforma => {
 
@@ -106,13 +103,13 @@ function animar() {
         } else {
 
             if (teclas.izquierda.pulsada && jugador.posicion.x > 400 && !jugador.haColisionado) {
-                desplazamiento -= 1
+
                 if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarIzquierda)
                 if (jugador.sobrePlataforma) jugador.setSprite(sprites.correrIzquierda)
                 jugador.moverIzquierda()
 
             } else if (teclas.derecha.pulsada && jugador.posicion.x < 800 && !jugador.haColisionado) {
-                desplazamiento += 5
+
                 if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarDerecha)
                 if (jugador.sobrePlataforma) jugador.setSprite(sprites.correrDerecha)
                 jugador.moverDerecha()
@@ -124,13 +121,16 @@ function animar() {
                 jugador.parar()
 
                 if (teclas.derecha.pulsada && !jugador.haColisionado) {
-                    desplazamiento += 5
+
                     if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarDerecha)
                     if (jugador.sobrePlataforma) jugador.setSprite(sprites.correrDerecha)
                     tilemap.posicion.x -= velocidadPlataformas
                     tienda.posicion.x -= velocidadPlataformas
                     plataformas.forEach(plataforma => {
                         plataforma.posicion.x -= velocidadPlataformas
+                    })
+                    metas.forEach(meta => {
+                        meta.posicion.x -= velocidadPlataformas
                     })
                     checkpoints.forEach(cpoint => {
                         cpoint.posicion.x -= velocidadPlataformas
@@ -151,12 +151,26 @@ function animar() {
                     checkpoints.forEach(cpoint => {
                         cpoint.posicion.x += velocidadPlataformas
                     })
+                    metas.forEach(meta => {
+                        meta.posicion.x += velocidadPlataformas
+                    })
                     magos.forEach(mago => {
                         mago.posicion.x += velocidadPlataformas
                     })
                 }
             }
         }
+
+        metas.forEach(meta => {
+            meta.render()
+
+            if ((jugador.derecha >= meta.posicion.x
+                && jugador.posicion.x <= meta.posicion.x + meta.anchoPlataforma)) {
+                dentrofinal = true
+            }
+
+        })
+
 
         //hitbox superior de la plataforma
 
@@ -188,12 +202,12 @@ function animar() {
 
     jugador.actualizar()
 
-    checkpoints.forEach(checkpoints => {
-        checkpoints.render()
-    })
-
+    //funciones relacionadas con las lamparas
     checkpoints.forEach(cpoint => {
 
+        cpoint.render()
+
+        //muestra el texto para establecer el punto de aparicion
         if ((jugador.derecha >= cpoint.posicion.x
             && jugador.posicion.x <= cpoint.posicion.x + cpoint.anchoPlataforma)) {
 
@@ -232,6 +246,7 @@ function animar() {
 
     })
 
+    //reiniciar el mapa y animacion de muerte
     if (jugador.base >= suelo - 2 && !reiniciando) {
         teclas.m.pulsada = true
         jugador.parar()
@@ -240,10 +255,13 @@ function animar() {
         reiniciarMapa()
     }
 
-
-    if (desplazamiento >= 2000) {
-        // console.log("VICTORIA")
-
+    //reiniciar el mapa y animacion de victoria
+    if (dentrofinal) {
+        hasMuerto.innerHTML = "<p>Victoria</p>"
+        teclas.m.pulsada = true
+        jugador.parar()
+        jugador.animacionMuerte = true
+        victoria()
     }
 }
 

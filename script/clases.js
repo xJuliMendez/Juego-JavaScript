@@ -111,7 +111,6 @@ class Jugador extends Sprite {
         this.haceDano = false
 
         this.animacionMuerte = false
-        this.haMuerto = false
 
         this.derecha = this.oDerecha = this.posicion.x + this.ancho
         this.base = this.oBase = this.posicion.y + this.altura
@@ -302,23 +301,6 @@ class Jugador2 extends Sprite {
 
 
     }
-
-    saltar() {
-        this.velocidad.y = -15
-    }
-
-    moverDerecha() {
-        this.velocidad.x = 5
-    }
-
-    moverIzquierda() {
-        this.velocidad.x = -5
-    }
-
-    parar() {
-        this.velocidad.x = 0
-    }
-
 }
 
 class Plataforma {

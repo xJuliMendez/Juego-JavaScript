@@ -2,11 +2,14 @@ let cargar = false
 
 let menuDisponible = false
 
+//elementos del html que se requieren para hacer los menus y los popups
+const hogueraApagada = document.querySelector("#hogueraApagada")
+
+const hogueraEncendida = document.querySelector("#hogueraEncendida")
+
 const jugar = document.querySelector(".jugar")
 
 const controles = document.querySelector(".controles")
-
-const abrirPersonaje = document.querySelector(".historia")
 
 const cerrarPopup = document.querySelectorAll(".cerrar")
 
@@ -18,6 +21,7 @@ const reiniciar = document.querySelector(".reiniciar")
 
 const hasMuerto = document.querySelector(".hasmuerto")
 hasMuerto.style.display = "none"
+
 const localStorage = window.localStorage
 
 let cargarMenu = localStorage.getItem("cargarMenu")
@@ -32,15 +36,23 @@ if (cargarMenu) {
 }
 
 
+function victoria(){
+    hasMuerto.style.display = "block"
+    hasMuerto.classList.add("animacionMuerte")
+    demo()
+}
+
 function reiniciarMapa(){
 
     let hogueraEncendida
 
-    checkpoints.forEach(cpoint =>{
-        if (cpoint.encendida){
-            hogueraEncendida = cpoint.numeroDeHoguera
-        }
-    })
+    if (finalizado){
+        checkpoints.forEach(cpoint =>{
+            if (cpoint.encendida){
+                hogueraEncendida = cpoint.numeroDeHoguera
+            }
+        })
+    }
 
     cargar = true
     if (hogueraEncendida != null)localStorage.setItem("respawn", hogueraEncendida)
@@ -55,6 +67,7 @@ function reiniciarMapa(){
 
 }
 
+//esta promesa nos permite simular un Thread sleep de Java
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -68,12 +81,7 @@ async function demo(tiempo = 4) {
     location.reload()
 }
 
-reiniciar.addEventListener("click", ({key}) => {
-
-    reiniciarMapa()
-
-})
-
+//evento para poder empezar a jugar mas rapido pulsando Enter
 addEventListener("keydown", ({key}) => {
 
     if (key === "Enter") {
@@ -84,12 +92,31 @@ addEventListener("keydown", ({key}) => {
 
 })
 
+//reiniciar el nivel desde el menu
+reiniciar.addEventListener("click", ({key}) => {
+
+    reiniciarMapa()
+
+})
+
+//dependiendo de como se quiere reiniciar el juego se guardan algunos valores en el local storage o no
 window.onbeforeunload = () => {
     if (!cargar) {
         localStorage.clear()
     }
 }
 
+
+//evento que muestra el popup con los controles
+controles.addEventListener("click", ()=>{
+
+    menuControles.style.display = "block"
+    menuControles.style.width = "30%"
+    menuControles.style.height = "40vh"
+
+})
+
+//evento que nos permite cerrar los popup
 cerrarPopup.forEach(cerrar => {
 
     cerrar.addEventListener("click", ()=>{
@@ -99,14 +126,8 @@ cerrarPopup.forEach(cerrar => {
 
 })
 
-controles.addEventListener("click", ()=>{
 
-    menuControles.style.display = "block"
-    menuControles.style.width = "30%"
-    menuControles.style.height = "40vh"
-
-})
-
+//muestra el menu al darle al escape
 addEventListener("keydown", ({key}) => {
 
     if (key == "Escape") {
@@ -123,6 +144,7 @@ addEventListener("keydown", ({key}) => {
 
 })
 
+//evento que nos permite jugar al hacer click en jugar ahora en el menu principal
 jugar.addEventListener("click", () => {
     canvas.style.display = "block"
     intro.style.display = "none"

@@ -4,8 +4,7 @@ const intro = document.querySelector('.intro')
 
 const c = canvas.getContext("2d")
 
-canvas.width = innerWidth //darle al canvas el ancho de toda la
-// pantalla se puede omitir la llamada al objeto ventana ya que heredamos de el
+canvas.width = innerWidth
 
 canvas.height = innerHeight
 
@@ -13,6 +12,7 @@ const gravedad = .6
 
 const suelo = canvas.height
 
+//creamos el jugador
 const jugador = new Jugador({
     spriteSet: "/imagenes/sprites/jugador/idle/Warrior_Idle_",
     posicion: {
@@ -23,18 +23,7 @@ const jugador = new Jugador({
     margenSprite: {x: 50, y: 65}
 })
 
-// const player2 = new Jugador2({
-//     ruta: "/imagenes/sprites/EVil Wizard 2/Sprites/Idle.png",
-//     posicion: {
-//         x: 200,
-//         y: 400
-//     },
-//     escala: 2.5,
-//     framesHorizontales: 8,
-//     framesVerticales: 0,
-//     margenSprite: {x: 50, y: 0}
-// })
-
+//array con las posiciones iniciales de los magos
 let posiciones = [{
     x:800,
     y:447
@@ -53,7 +42,7 @@ const magos = []
 
 for (let i = 0; i < posiciones.length; i++) {
             magos.push(new Jugador2({
-                ruta: "/imagenes/sprites/EVil Wizard 2/Sprites/Idle.png",
+                ruta: "/imagenes/sprites/mago/Sprites/Idle.png",
                 posicion: {
                     x: posiciones[i].x,
                     y: posiciones[i].y
@@ -69,6 +58,7 @@ for (let i = 0; i < posiciones.length; i++) {
 }
 
 
+//en caso de haber muerto esto nos permite cargar el mapa desde la ultima lampara con el mapa desplazado
 if (localStorage.getItem("respawn")) {
 
 
