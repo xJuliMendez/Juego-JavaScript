@@ -33,6 +33,16 @@ const sprites = {
         src: "/imagenes/sprites/jugador/saltarLeft/Warrior_Jump_",
         framesMaxAnimacion: 3,
         framesEspera: 15
+    },
+    atacar: {
+        src: "/imagenes/sprites/jugador/atacar/Warrior_Attack_",
+        framesMaxAnimacion: 12,
+        framesEspera: 4
+    },
+    muerte: {
+        src: "/imagenes/sprites/jugador/muerte/Warrior_Death_",
+        framesMaxAnimacion: 11,
+        framesEspera: 10
     }
 }
 
@@ -51,12 +61,13 @@ const teclas = {
     },
     q: {
         pulsada: false
+    },
+    m: {
+        pulsada: false
     }
 }
 
 var desplazamiento = 0
-
-let subiendoMapa = false
 
 let reiniciando = false
 
@@ -80,11 +91,17 @@ function animar() {
         plataforma.render()
 
         //moviemiento del jugador
-        if (teclas.abajo.pulsada) {
+        if (teclas.m.pulsada) {
+            jugador.setSprite(sprites.muerte)
+        } else if (teclas.abajo.pulsada) {
 
             if (teclas.arriba.pulsada) jugador.setSprite(sprites.saltarDerecha)
             else jugador.setSprite(sprites.agachar)
             jugador.velocidad.x = 0
+
+        } else if (teclas.q.pulsada) {
+            jugador.parar()
+            jugador.setSprite(sprites.atacar)
 
         } else {
 
@@ -118,7 +135,7 @@ function animar() {
                     checkpoints.forEach(cpoint => {
                         cpoint.posicion.x -= velocidadPlataformas
                     })
-                    magos.forEach(mago =>{
+                    magos.forEach(mago => {
                         mago.posicion.x -= velocidadPlataformas
                     })
                 }
@@ -134,7 +151,7 @@ function animar() {
                     checkpoints.forEach(cpoint => {
                         cpoint.posicion.x += velocidadPlataformas
                     })
-                    magos.forEach(mago =>{
+                    magos.forEach(mago => {
                         mago.posicion.x += velocidadPlataformas
                     })
                 }
@@ -153,42 +170,19 @@ function animar() {
             jugador.velocidad.y = 0
         }
 
+        magos.forEach(mago => {
+            if (mago.base <= plataforma.top
+                && mago.base + mago.velocidad.y >= plataforma.top) {
+                mago.sobrePlataforma = true
+                mago.haColisionado = true
+                mago.velocidad.y = 0
+            }
+        })
 
-        //hitbox inferior de la plataforma
-        // if (jugador.derecha >= plataforma.posicion.x
-        //     && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma
-        //     && jugador.base > plataforma.bot
-        //     && jugador.posicion.y <= plataforma.bot + 100
-        //     && jugador.posicion.y >= plataforma.posicion.y) {
-        //     console.log("pabajo")
-        //     jugador.velocidad.y += 0.5
-        // }
-        //hitbox lateral de la plataforma desde abajo
-        // if ((jugador.derecha >= plataforma.posicion.x
-        //         && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma)
-        //     && (jugador.posicion.y > plataforma.bot || jugador.base > plataforma.posicion.y)
-        //     && !jugador.sobrePlataforma
-        // ) {
-        //     console.log("quieto")
-        //     jugador.haColisionado = true
-        // }
+    })
 
-        // if (jugador.sobrePlataforma
-        // &&(jugador.derecha >= plataforma.posicion.x
-        //         && jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma)
-        //     && jugador.base >= plataforma.top
-        //     && jugador.posicion.y  <= plataforma.top){
-        //     console.log("columna")
-        //     jugador.haColisionado = true
-        // }
-        // if (((jugador.posicion.y >= plataforma.top && jugador.posicion.y <= plataforma.base)
-        //         || (jugador.base >= plataforma.top && jugador.base <= plataforma.top))
-        //     && (jugador.derecha >= plataforma.posicion.x || jugador.posicion.x <= plataforma.posicion.x + plataforma.anchoPlataforma)
-        // ) {
-        //     jugador.haColisionado = true
-        // } else {
-        //     jugador.haColisionado = false
-        // }
+    magos.forEach(mago => {
+        mago.actualizar()
 
     })
 
@@ -196,10 +190,6 @@ function animar() {
 
     checkpoints.forEach(checkpoints => {
         checkpoints.render()
-    })
-
-    magos.forEach(esqueleto =>{
-        esqueleto.render()
     })
 
     checkpoints.forEach(cpoint => {
@@ -213,7 +203,7 @@ function animar() {
 
 
             addEventListener("keydown", ({key}) => {
-                if (key === "q") {
+                if (key === "r") {
 
                     console.log(jugador.derecha + " || " + cpoint.posicion.x)
 
@@ -243,10 +233,12 @@ function animar() {
     })
 
     if (jugador.base >= suelo - 2 && !reiniciando) {
+        teclas.m.pulsada = true
+        jugador.parar()
+        jugador.animacionMuerte = true
         reiniciando = true
         reiniciarMapa()
     }
-
 
 
     if (desplazamiento >= 2000) {
@@ -257,7 +249,6 @@ function animar() {
 
 
 addEventListener("keydown", ({key}) => {
-
 
     if (!reiniciando) {
         switch (key) {
@@ -287,17 +278,28 @@ addEventListener("keydown", ({key}) => {
                 teclas.derecha.pulsada = true
                 break
             case "q":
+                teclas.q.pulsada = true
+                magos.forEach(mago => {
 
-                console.log(posicionHogueras)
+                    if (
+                        jugador.haceDano &&
+                        jugador.hitboxAtaque.posicion.x + jugador.hitboxAtaque.ancho >= mago.posicion.x + 160
+                        && jugador.hitboxAtaque.posicion.x <= mago.posicion.x + mago.ancho
+                        && jugador.hitboxAtaque.posicion.y >= mago.posicion.y
+                        && jugador.hitboxAtaque.posicion.y >= mago.base
+                    ) {
+                        mago.vida = mago.vida - 1
+                    }
 
-                checkpoints.forEach(cpoint => {
-                    console.log(cpoint)
                 })
 
-                teclas.q.pulsada = true
+                break
+            case "i":
+                console.log(jugador)
+                console.log(magos)
                 break
         }
-    }else jugador.parar()
+    } else jugador.parar()
 
 })
 addEventListener("keyup", ({key}) => {
@@ -320,6 +322,7 @@ addEventListener("keyup", ({key}) => {
                 teclas.q.pulsada = false
                 break
         }
-    }jugador.parar()
+    }
+    jugador.parar()
 })
 

@@ -109,8 +109,6 @@ controles.addEventListener("click", ()=>{
 
 addEventListener("keydown", ({key}) => {
 
-    console.log(menuDisponible)
-
     if (key == "Escape") {
         if (menuDisponible) {
             menuEsc.style.display = "block"

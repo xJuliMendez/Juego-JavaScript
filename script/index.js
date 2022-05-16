@@ -35,60 +35,39 @@ const jugador = new Jugador({
 //     margenSprite: {x: 50, y: 0}
 // })
 
-
-
-let mago1 = new Jugador2({
-    ruta: "/imagenes/sprites/EVil Wizard 2/Sprites/Idle.png",
-    posicion: {
-        x: 800,
-        y: 480
-    },
-    escala: 2,
-    framesHorizontales: 8,
-    framesVerticales: 1,
-    margenSprite: {x: 0, y: 0}
-})
-
-let mago2 = new Jugador2({
-    ruta: "/imagenes/sprites/EVil Wizard 2/Sprites/Idle.png",
-    posicion: {
-        x: 1800,
-        y: 33
-    },
-    escala: 2,
-    framesHorizontales: 8,
-    framesVerticales: 1,
-    margenSprite: {x: 0, y: 0}
-})
-
-let mago3 = new Jugador2({
-    ruta: "/imagenes/sprites/EVil Wizard 2/Sprites/Idle.png",
-    posicion: {
-        x: 3650,
-        y: 280
-    },
-    escala: 2,
-    framesHorizontales: 8,
-    framesVerticales: 1,
-    margenSprite: {x: 0, y: 0}
-})
-
-let mago4 = new Jugador2({
-    ruta: "/imagenes/sprites/EVil Wizard 2/Sprites/Idle.png",
-    posicion: {
-        x: 6200,
-        y: 35
-    },
-    escala: 2,
-    framesHorizontales: 8,
-    framesVerticales: 1,
-    margenSprite: {x: 0, y: 0}
-})
-
+let posiciones = [{
+    x:800,
+    y:447
+},{
+    x: 1800,
+    y: 30
+},{
+    x: 3650,
+    y: 280
+},{
+    x: 6100,
+    y: 35
+}]
 
 const magos = []
 
-magos.push(mago1,mago2,mago3,mago4)
+for (let i = 0; i < posiciones.length; i++) {
+            magos.push(new Jugador2({
+                ruta: "/imagenes/sprites/EVil Wizard 2/Sprites/Idle.png",
+                posicion: {
+                    x: posiciones[i].x,
+                    y: posiciones[i].y
+                },
+                escala: 2,
+                framesHorizontales: 8,
+                framesVerticales: 1,
+                margenSprite: {x: 0, y: 5}
+            }))
+    if (i == 0){
+        magos[0].margenSprite.y = -35
+    }
+}
+
 
 if (localStorage.getItem("respawn")) {
 
@@ -105,8 +84,5 @@ if (localStorage.getItem("respawn")) {
         mago.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
     })
 }
-
-
-console.log(magos)
 
 animar()
