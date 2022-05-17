@@ -5,8 +5,6 @@ class Sprite {
                     escala = 1,
                     framesHorizontales = 1,
                     framesMaxAnimacion = 1,
-                    framesVerticales = 1,
-                    posicionVertical = 0,
                     margenSprite = {x: 0, y: 0}
                 }) {
 
@@ -14,29 +12,31 @@ class Sprite {
             x: posicion.x,
             y: posicion.y
         }
+        //info de la imagen
         this.imagen = new Image()
         this.imagen.src = ruta
         this.escala = escala
-        this.posicionVertical = posicionVertical
+        //info de los frames de la imagen
         this.framesHorizontales = framesHorizontales
-        this.framesMaxAnimacion = framesMaxAnimacion
-        this.framesVerticales = framesVerticales
+        //info de animacion de los frames
         this.frameActual = 0
         this.framesTranscurridos = 0
         this.framesEspera = 10
+
         this.margenSprite = margenSprite
     }
 
     render() {
         c.drawImage(this.imagen,
-            this.frameActual * (this.imagen.width / this.framesHorizontales),                                                  //posicion X inicial
-            this.posicionVertical * (this.imagen.height / this.framesVerticales),                                                  //posicion Y inicial
-            this.imagen.width / this.framesHorizontales,                    //tamañano del recorte, en este caso es la longitud entre el numero de frames de animacion dentro de la imagen
-            this.imagen.height / this.framesVerticales,                                     //alto del recorte
-            this.posicion.x - this.margenSprite.x,                                        //posicion del canvas en la que se va a colocar
+            this.frameActual * (this.imagen.width / this.framesHorizontales),//posicion X inicial
+            0,//posicion Y inicial
+            this.imagen.width / this.framesHorizontales,//tamañano del recorte, en este caso es la longitud entre
+                                                            // el numero de frames de animacion dentro de la imagen
+            this.imagen.height ,//alto del recorte
+            this.posicion.x - this.margenSprite.x,//posicion del canvas en la que se va a colocar
             this.posicion.y - this.margenSprite.y,
-            (this.imagen.width / this.framesHorizontales) * this.escala,       //tamaño que se va a mostrar
-            (this.imagen.height / this.framesVerticales) * this.escala)
+            (this.imagen.width / this.framesHorizontales) * this.escala,//tamaño que se va a mostrar
+            (this.imagen.height ) * this.escala)
     }
 
     actualizarFrames() {
@@ -44,7 +44,7 @@ class Sprite {
 
         if (this.framesTranscurridos % this.framesEspera === 0) {
 
-            if (this.frameActual < this.framesMaxAnimacion - 1) {
+            if (this.frameActual < this.framesHorizontales - 1) {
                 this.frameActual++
             } else {
                 this.frameActual = 0
@@ -141,6 +141,7 @@ class Jugador extends Sprite {
             if (this.frameActual < this.framesMaxAnimacion - 1) {
                 this.imagen.src = this.ruta + this.frameActual + ".png"
 
+                //la ejecucion solo entra aqui cuando ataca. esta condicion esta para saber cuando es que el jugador hace daño
                 if (this.estaAtacando && (this.frameActual == 6 || this.frameActual == 7 || this.frameActual == 10 || this.frameActual == 11)) {
                     this.haceDano = true
                 } else this.haceDano = false
@@ -148,7 +149,7 @@ class Jugador extends Sprite {
                 this.frameActual++
 
             } else {
-
+                //si el jugador ha muerto no se resetea el contador si no que muestra el ultimo frame de la animacion de muerte
                 if (this.animacionMuerte) this.imagen.src = this.ruta + 11 + ".png"
                 else this.frameActual = 1
 
@@ -182,6 +183,18 @@ class Jugador extends Sprite {
 
     }
 
+    setSprite(sprite) {
+
+        if (sprite == sprites.atacar) this.estaAtacando = true
+        else this.estaAtacando = false
+
+        if (sprite == sprite.muerte) this.animacionMuerte = true
+
+        this.ruta = sprite.src
+        this.framesMaxAnimacion = sprite.framesMaxAnimacion
+        this.framesEspera = sprite.framesEspera
+    }
+
     saltar() {
         this.velocidad.y = -12
     }
@@ -198,28 +211,15 @@ class Jugador extends Sprite {
         this.velocidad.x = 0
     }
 
-    setSprite(sprite) {
-
-        if (sprite == sprites.atacar) this.estaAtacando = true
-        else this.estaAtacando = false
-
-        if (sprite == sprite.muerte) this.animacionMuerte = true
-
-        this.ruta = sprite.src
-        this.framesMaxAnimacion = sprite.framesMaxAnimacion
-        this.framesEspera = sprite.framesEspera
-    }
 
 }
 
-class Jugador2 extends Sprite {
+class Mago extends Sprite {
     constructor({
                     ruta,
                     posicion,
                     escala = 1,
                     framesHorizontales = 1,
-                    framesMaxAnimacion = 6,
-                    framesVerticales = 8,
                     margenSprite = {x: 0, y: 0}
                 }) {
 
@@ -228,7 +228,6 @@ class Jugador2 extends Sprite {
             posicion,
             escala,
             framesHorizontales,
-            framesVerticales,
             margenSprite
         })
 
@@ -243,8 +242,6 @@ class Jugador2 extends Sprite {
 
         this.vida = 10
 
-        this.posicionVertical = 0
-        this.framesMaxAnimacion = framesMaxAnimacion
         this.frameActual = 0
         this.framesTranscurridos = 0
         this.framesEspera = 10
@@ -262,19 +259,20 @@ class Jugador2 extends Sprite {
 
     render() {
 
-
+        //si no le queda vida desaparece
         if (this.vida <= 0) {
             c.drawImage(new Image(), 0, 0, 0, 0)
         } else {
             c.drawImage(this.imagen,
-                this.frameActual * (this.imagen.width / this.framesHorizontales),                     //posicion X inicial
-                this.posicionVertical * (this.imagen.height / this.framesVerticales),                 //posicion Y inicial
-                this.imagen.width / this.framesHorizontales,                    //tamañano del recorte, en este caso es la longitud entre el numero de frames de animacion dentro de la imagen
-                this.imagen.height,                                     //alto del recorte
-                this.posicion.x - this.margenSprite.x,                                        //posicion del canvas en la que se va a colocar
+                this.frameActual * (this.imagen.width / this.framesHorizontales),//posicion X inicial
+                0,//posicion Y inicial
+                this.imagen.width / this.framesHorizontales,//tamañano del recorte, en este caso es la longitud entre el numero
+                                                                // de frames de animacion dentro de la imagen
+                this.imagen.height,//alto del recorte
+                this.posicion.x - this.margenSprite.x,//posicion del canvas en la que se va a colocar
                 this.posicion.y - this.margenSprite.y,
-                (this.imagen.width / this.framesHorizontales) * this.escala,       //tamaño que se va a mostrar
-                (this.imagen.height / this.framesVerticales) * this.escala)
+                (this.imagen.width / this.framesHorizontales) * this.escala,//tamaño que se va a mostrar
+                (this.imagen.height) * this.escala)
         }
 
     }

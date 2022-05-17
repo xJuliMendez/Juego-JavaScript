@@ -39,8 +39,15 @@ if (cargarMenu) {
 function victoria(){
     hasMuerto.style.display = "block"
     hasMuerto.classList.add("animacionMuerte")
-    demo()
+    temporizador()
 }
+
+//reiniciar el nivel desde el menu
+reiniciar.addEventListener("click", ({key}) => {
+
+    reiniciarMapa()
+
+})
 
 function reiniciarMapa(){
 
@@ -61,8 +68,8 @@ function reiniciarMapa(){
     {
         hasMuerto.style.display = "block"
         hasMuerto.classList.add("animacionMuerte")
-        demo()
-    }else demo(0)
+        temporizador()
+    }else temporizador(0)
 
 
 }
@@ -72,7 +79,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function demo(tiempo = 4) {
+async function temporizador(tiempo = 4) {
     for (let i = 0; i < tiempo; i++) {
         await sleep(i * 1000);
     }
@@ -88,14 +95,8 @@ addEventListener("keydown", ({key}) => {
         canvas.style.display = "block"
         intro.style.display = "none"
         menuDisponible = true
+
     }
-
-})
-
-//reiniciar el nivel desde el menu
-reiniciar.addEventListener("click", ({key}) => {
-
-    reiniciarMapa()
 
 })
 

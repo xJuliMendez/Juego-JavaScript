@@ -41,7 +41,7 @@ let posiciones = [{
 const magos = []
 
 for (let i = 0; i < posiciones.length; i++) {
-            magos.push(new Jugador2({
+            magos.push(new Mago({
                 ruta: "/imagenes/sprites/mago/Sprites/Idle.png",
                 posicion: {
                     x: posiciones[i].x,
@@ -60,7 +60,6 @@ for (let i = 0; i < posiciones.length; i++) {
 
 //en caso de haber muerto esto nos permite cargar el mapa desde la ultima lampara con el mapa desplazado
 if (localStorage.getItem("respawn")) {
-
 
     tilemap.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
     tienda.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
