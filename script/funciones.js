@@ -252,6 +252,7 @@ function animar() {
         jugador.parar()
         jugador.animacionMuerte = true
         reiniciando = true
+        finalizado = true
         reiniciarMapa()
     }
 

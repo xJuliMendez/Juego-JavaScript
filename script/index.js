@@ -72,6 +72,9 @@ if (localStorage.getItem("respawn")) {
     magos.forEach(mago =>{
         mago.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
     })
+    metas.forEach(meta =>{
+        meta.posicion.x -= posicionHogueras[localStorage.getItem("respawn")].x - jugador.posicion.x
+    })
 }
 
 animar()
